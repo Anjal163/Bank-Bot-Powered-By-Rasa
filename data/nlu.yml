@@ -1,0 +1,269 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+
+- intent: open_account
+  examples: |
+      - I want to open a bank account
+      - Can I open a new account?
+      - I would like to open an account
+      - Open a new bank account
+
+- intent: provide_name
+  examples: |
+      - My name is [Anjal](name)
+      - I am [Anjal](name)
+      - It's [Anjal Nigam](name)
+      - [John Doe](name)
+
+- intent: provide_account_type
+  examples: |
+      - I want a [savings](account_type) account
+      - [Current](account_type) account, please
+      - [Savings](account_type)
+      - I prefer [current](account_type)
+
+- intent: provide_deposit
+  examples: |
+      - I want to deposit [5000](deposit_amount)
+      - My initial deposit is [10000](deposit_amount)
+      - [2000](deposit_amount)
+
+- intent: check_balance
+  examples: |
+    - I want to check my balance
+    - check my account balance
+    - can you tell my balance
+    - show me my account balance
+    - balance inquiry
+    - what's my balance
+
+- regex: account_number
+  examples: |
+    - \d{7,12}
+
+- intent: provide_account_number
+  examples: |
+    - My account number is [1234522](account_number)
+    - It's [6789022](account_number)
+    - [1111122](account_number)
+    - [2222211](account_number)
+    - account number is [1234567822](account_number)
+    - [9876543210](account_number)
+    - [1122334455](account_number)
+    - [5544332211](account_number)
+    - The account number is [123456789](account_number)
+    - acc no [987654321](account_number)
+    - [111222333](account_number)
+    - [444555666](account_number)
+    - [777888999](account_number)
+    - my acc number [123123123](account_number)
+
+- intent: transfer_money
+  examples: |
+    - I want to transfer money
+    - transfer funds
+    - send money
+    - make a transfer
+    - I want to send money
+
+- intent: provide_receiver_name
+  examples: |
+    - [Anil](receiver_name)
+    - receiver name is [Ravi](receiver_name)
+    - to [Priya](receiver_name)
+    - [John](receiver_name)
+    - [Anuj](receiver_name)
+    - [Ravi](receiver_name)
+
+- intent: provide_amount
+  examples: |
+    - [500](bill_amount)
+    - [1200](bill_amount)
+    - [300](bill_amount)
+    - It's [700](bill_amount)
+    - I want to pay [900](bill_amount)
+    - The amount is [450](bill_amount)
+    - Pay [1500](bill_amount)
+    - bill is [2500](bill_amount)
+    - [350](bill_amount) rupees
+    - [4500](bill_amount) only
+
+- intent: apply_loan
+  examples: |
+    - I want to apply for a loan
+    - I need a loan
+    - Can I get a personal loan?
+    - I want to take a loan
+    - Apply for loan
+
+- intent: provide_loan_type
+  examples: |
+    - I want a [personal](loan_type) loan
+    - It should be a [home](loan_type) loan
+    - I need a [car](loan_type) loan
+
+- intent: pay_bill
+  examples: |
+    - I want to pay bill
+    - I want to pay my bill
+    - I want to pay electricity bill
+    - I need to pay gas bill
+    - I want to pay broadband bill
+    - pay my bill
+    - pay bill
+    - I want to make bill payment    
+
+- intent: provide_bill_type
+  examples: |
+    - [gas](bill_type)
+    - [electricity](bill_type)
+    - [broadband](bill_type)
+    - I want to pay [gas](bill_type) bill
+    - I want to pay [electricity](bill_type) bill
+    - It's a [broadband](bill_type) bill
+    - I need to pay my [gas](bill_type) bill
+
+- intent: provide_bill_amount
+  examples: |
+    - [500](bill_amount)
+    - [1200](bill_amount)
+    - [300](bill_amount)
+    - It's [700](bill_amount)
+    - I want to pay [900](bill_amount)
+    - The amount is [450](bill_amount)
+    - Pay [1500](bill_amount)
+
+- intent: apply_card
+  examples: |
+    - I want to apply for a card
+    - I need a new card
+    - I want a debit card
+    - I want a credit card
+    - I want to apply for debit card
+    - I want to apply for credit card
+
+- intent: provide_card_type
+  examples: |
+    - [credit card](card_type)
+    - [debit card](card_type)
+    - I want a [credit card](card_type)
+    - I need a [debit card](card_type)
+    - [credit](card_type)
+    - [debit](card_type)
+    - I want [credit](card_type)
+    - I want [debit](card_type)
+    - [Credit Card](card_type)
+    - [Debit Card](card_type)
+    - I want [Credit Card](card_type)
+    - I want [Debit Card](card_type)
+
+- lookup: card_type
+  examples: |
+    - credit card
+    - debit card
+    - credit
+    - debit
+    - Credit Card
+    - Debit Card
+
+- synonym: credit card
+  examples: |
+    - credit
+    - Credit Card
+    - credit card
+    - CREDIT CARD
+
+- synonym: debit card
+  examples: |
+    - debit
+    - Debit Card
+    - debit card
+    - DEBIT CARD
+
+- intent: help
+  examples: |
+    - help
+    - what can you do?
+    - assist me
+    - I need help
+
+- intent: contact_support
+  examples: |
+    - contact support
+    - talk to support
+    - customer service
+
+- intent: feedback
+  examples: |
+    - give feedback
+    - feedback
+    - rate service
+
+- intent: out_of_scope
+  examples: |
+    - tell me a joke
+    - what's the weather?
+    - order pizza
+    - something unrelated
+
+- intent: show_recent_transactions
+  examples: |
+    - Show my recent transactions
+    - I want to see recent transactions
+    - recent transactions
+    - last transactions
+
+- intent: stop
+  examples: |
+    - stop
+    - cancel
+    - never mind
+    - forget it

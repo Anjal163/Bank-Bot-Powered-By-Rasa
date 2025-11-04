@@ -1,0 +1,20 @@
+{
+  "0": "affirm",
+  "1": "apply_loan",
+  "2": "check_balance",
+  "3": "deny",
+  "4": "goodbye",
+  "5": "greet",
+  "6": "open_account",
+  "7": "provide_account_number",
+  "8": "provide_account_type",
+  "9": "provide_age",
+  "10": "provide_amount",
+  "11": "provide_deposit",
+  "12": "provide_loan_amount",
+  "13": "provide_loan_type",
+  "14": "provide_name",
+  "15": "provide_receiver_name",
+  "16": "provide_repayment_months",
+  "17": "transfer_money"
+}

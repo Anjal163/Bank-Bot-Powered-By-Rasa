@@ -1,0 +1,422 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💬 Bank Bot Powered By Rasa </title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ABE2, #5563DE);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .chat-container {
+            width: 400px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #5563DE;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.3em;
+            letter-spacing: 0.5px;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px 14px;
+            border-radius: 15px;
+            max-width: 75%;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+        .user {
+            background: #E0E7FF;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        .bot {
+            background: #F3F4F6;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        .input-box {
+            display: flex;
+            padding: 10px;
+            background: #F9FAFB;
+            border-top: 1px solid #E5E7EB;
+        }
+        .input-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1em;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .input-box button {
+            background: #5563DE;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .input-box button:hover {
+            background: #4450B8;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D1D5DB;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">💬 Rasa Chatbot</div>
+        <div class="chat-box" id="chat-box">
+            <div class="message bot">Hi! I’m your Bank Bot 🤖. How can I assist you today?</div>
+        </div>
+        <div class="input-box">
+            <input id="user-input" type="text" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            appendMessage(message, 'user');
+            input.value = '';
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sender: 'user', message })
+                });
+
+                const data = await response.json();
+                const botReply = data.bot_reply || 'No response';
+                appendMessage(botReply, 'bot');
+            } catch (error) {
+                appendMessage('⚠️ Failed to connect to server.', 'bot');
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const chatBox = document.getElementById('chat-box');
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', sender);
+            msgDiv.textContent = text;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>💬 Bank Bot Powered By Rasa</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #5563DE, #3B82F6, #111827);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin: 0;
+      color: #111;
+    }
+
+    /* Floating circles background */
+    .bg-circles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-circles span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      animation: float 20s linear infinite;
+      border-radius: 50%;
+      bottom: -150px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .chat-container {
+      position: relative;
+      width: 420px;
+      height: 80vh;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #3B82F6, #5563DE);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.3em;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 12px 16px;
+      border-radius: 15px;
+      max-width: 75%;
+      word-wrap: break-word;
+      line-height: 1.4;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .user {
+      background: linear-gradient(135deg, #93C5FD, #60A5FA);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      box-shadow: 0 2px 8px rgba(96, 165, 250, 0.4);
+    }
+
+    .bot {
+      background: rgba(255, 255, 255, 0.7);
+      color: #111;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-box {
+      display: flex;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.25);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .input-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1em;
+      padding: 10px 15px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      transition: 0.3s;
+    }
+
+    .input-box input:focus {
+      box-shadow: 0 0 10px #3B82F6;
+    }
+
+    .input-box button {
+      background: linear-gradient(135deg, #3B82F6, #5563DE);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      margin-left: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .input-box button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #2563EB, #4F46E5);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    /* Typing animation */
+    .typing {
+      width: 40px;
+      height: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .typing div {
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border-radius: 50%;
+      animation: blink 1.4s infinite both;
+    }
+
+    .typing div:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing div:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0.2;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0.2;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-circles">
+    <span style="left:10%; width:30px; height:30px; animation-duration:18s;"></span>
+    <span style="left:50%; width:20px; height:20px; animation-duration:25s;"></span>
+    <span style="left:80%; width:40px; height:40px; animation-duration:22s;"></span>
+    <span style="left:30%; width:25px; height:25px; animation-duration:20s;"></span>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-header">💬 Bank Bot — Powered by Rasa</div>
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">Hi! I’m your Bank Bot 🤖. How can I assist you today?</div>
+    </div>
+    <div class="input-box">
+      <input
+        id="user-input"
+        type="text"
+        placeholder="Type your message..."
+        onkeydown="if(event.key==='Enter') sendMessage()"
+      />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById('user-input');
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage(message, 'user');
+      input.value = '';
+
+      // Show typing animation
+      const typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('message', 'bot');
+      typingIndicator.innerHTML = '<div class="typing"><div></div><div></div><div></div></div>';
+      document.getElementById('chat-box').appendChild(typingIndicator);
+      scrollToBottom();
+
+      try {
+        const response = await fetch('http://127.0.0.1:8000/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sender: 'user', message })
+        });
+
+        const data = await response.json();
+        const botReply = data.bot_reply || 'No response';
+        typingIndicator.remove();
+        appendMessage(botReply, 'bot');
+      } catch (error) {
+        typingIndicator.remove();
+        appendMessage('⚠️ Failed to connect to server.', 'bot');
+      }
+    }
+
+    function appendMessage(text, sender) {
+      const chatBox = document.getElementById('chat-box');
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message', sender);
+      msgDiv.textContent = text;
+      chatBox.appendChild(msgDiv);
+      scrollToBottom();
+    }
+
+    function scrollToBottom() {
+      const chatBox = document.getElementById('chat-box');
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "0": "affirm",
+  "1": "apply_card",
+  "2": "apply_loan",
+  "3": "card_type",
+  "4": "check_balance",
+  "5": "deny",
+  "6": "goodbye",
+  "7": "greet",
+  "8": "open_account",
+  "9": "pay_bill",
+  "10": "provide_account_number",
+  "11": "provide_account_type",
+  "12": "provide_amount",
+  "13": "provide_bill_amount",
+  "14": "provide_bill_type",
+  "15": "provide_deposit",
+  "16": "provide_loan_type",
+  "17": "provide_name",
+  "18": "provide_receiver_name",
+  "19": "provide_repayment_months",
+  "20": "transfer_money"
+}

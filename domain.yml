@@ -1,0 +1,232 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - open_account
+  - provide_name
+  - provide_account_type
+  - provide_deposit
+  - check_balance
+  - provide_account_number
+  - transfer_money
+  - provide_receiver_name
+  - provide_amount
+  - apply_loan
+  - pay_bill
+  - apply_card
+  - provide_card_type
+  - help
+  - contact_support
+  - feedback
+  - out_of_scope
+  - show_recent_transactions
+
+entities:
+  - name
+  - account_type
+  - deposit_amount
+  - account_number
+  - receiver_name
+  - amount
+  - loan_type
+  - bill_type
+  - bill_amount
+  - card_type
+
+slots:
+  name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+
+  account_type:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: account_type
+
+  deposit_amount:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: deposit_amount
+
+  # account_number:
+  #   type: text
+  #   mappings:
+  #     - type: from_entity
+  #       entity: account_number
+      
+  account_number:
+    type: text
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: balance_form
+            requested_slot: account_number
+      - type: from_entity
+        entity: account_number
+        conditions:
+          - active_loop: balance_form
+            requested_slot: account_number
+      - type: from_entity
+        entity: account_number
+
+  receiver_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: receiver_name
+
+  amount:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: amount
+
+  loan_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: loan_type
+
+  bill_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: bill_type
+
+  bill_amount:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: bill_amount
+
+  card_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: card_type
+        conditions:
+          - active_loop: card_application_form
+            requested_slot: card_type
+      - type: from_entity
+        entity: card_type
+
+responses:
+  utter_greet:
+  - text: "Hello! 👋 I’m your Bank Assistant. How may I help you today?"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_ask_rephrase:
+    - text: "I'm sorry, I didn't understand. Can you rephrase?"
+
+  utter_ask_name:
+    - text: "Sure! May I have your full name?"
+
+  utter_ask_account_type:
+    - text: "Thanks {name}. Which type of account would you like(Savings/Current)"
+
+  utter_ask_deposit_amount:
+    - text: "Great choice! How much would you like to deposit initially?"
+
+  utter_account_opened:
+    - text: "Thank you {name}! Your {account_type} account has been opened with an initial deposit of {deposit_amount}."
+
+  utter_ask_account_number:
+    - text: "Please provide account number."
+
+  utter_show_balance:
+    - text: "Your balance for account {account_number} is ₹15,000."
+
+  utter_ask_receiver_name:
+    - text: "Sure! Please tell me the receiver name."
+
+  utter_ask_amount:
+    - text: "How much money would you like to transfer?"
+
+  utter_transfer_success:
+    - text: "₹{amount} has been successfully transferred from your account to  {receiver_name}."
+
+  utter_ask_loan_type:
+    - text: "Which type of loan are you applying for? (Personal/Home/Car/Education)"
+
+  utter_submit_loan_application:
+    - text: "Thank you! Your loan application has been submitted successfully."
+
+  utter_ask_bill_type:
+    - text: "Sure! Which type of bill do you want to pay? (Electricity/Broadband/Gas)"
+
+  utter_ask_bill_amount:
+    - text: "Please tell me the amount to pay."
+
+  utter_bill_paid:
+    - text: "✅ Your {bill_type} bill of ₹{bill_amount} has been paid successfully!"  
+
+  utter_ask_card_type:
+    - text: "Sure! Do you want to apply for a Credit Card or Debit Card?"
+
+  utter_submit_card_application:
+    - text: "Great! Your {card_type} application has been submitted successfully for your {account_type} account!"
+
+  utter_help:
+    - text: "I can help you with checking balance, transferring money, paying bills, loans, card services, and transactions."
+  utter_contact_support:
+    - text: "You can reach customer support at 1800-123-4567 or email support@bank.com."
+  utter_feedback:
+    - text: "Thanks for your feedback! 😊"
+  utter_out_of_scope:
+    - text: "Sorry, I can only help with banking-related queries."
+  utter_default:
+    - text: "I'm sorry, I didn’t quite understand that. 🤔 Can you rephrase?"  
+forms:
+  open_account_form:
+    required_slots:
+      - name
+      - account_type
+      - deposit_amount
+
+  balance_form:
+    required_slots:
+      - account_type
+      - account_number
+
+  transfer_money_form:
+    required_slots:
+      - receiver_name
+      - amount
+
+  loan_application_form:
+    required_slots:
+      - name
+      - loan_type
+
+  pay_bill_form:
+    required_slots:
+      - bill_type
+      - bill_amount
+  
+  card_application_form:
+    required_slots:
+      - card_type
+      - name
+      - account_type
+
+actions:
+  - action_show_recent_transactions
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

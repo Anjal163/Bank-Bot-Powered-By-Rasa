@@ -1,0 +1,6 @@
+[
+  {
+    "name": "card_type",
+    "pattern": "(\\bcredit\\ card\\b|\\bdebit\\ card\\b|\\bcredit\\b|\\bdebit\\b|\\bCredit\\ Card\\b|\\bDebit\\ Card\\b)"
+  }
+]

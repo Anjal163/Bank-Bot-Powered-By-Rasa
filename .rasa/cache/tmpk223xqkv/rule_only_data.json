@@ -1,0 +1,12 @@
+{
+  "rule_only_slots": [
+    "amount",
+    "receiver_name"
+  ],
+  "rule_only_loops": [
+    "transfer_money_form",
+    "open_account_form",
+    "loan_application_form",
+    "balance_form"
+  ]
+}

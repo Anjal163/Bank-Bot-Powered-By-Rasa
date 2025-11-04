@@ -1,0 +1,12 @@
+{
+  "0": "affirm",
+  "1": "check_balance",
+  "2": "deny",
+  "3": "goodbye",
+  "4": "greet",
+  "5": "open_account",
+  "6": "provide_account_number",
+  "7": "provide_account_type",
+  "8": "provide_deposit",
+  "9": "provide_name"
+}

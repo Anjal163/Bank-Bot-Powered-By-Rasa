@@ -1,0 +1,137 @@
+version: "3.1"
+
+rules:
+
+- rule: Greet user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Open account form
+  steps:
+    - intent: open_account
+    - action: open_account_form
+    - active_loop: open_account_form
+
+- rule: Submit open account form
+  condition:
+    - active_loop: open_account_form
+  steps:
+    - action: open_account_form
+    - active_loop: null
+    - action: utter_account_opened
+
+- rule: Start balance form
+  steps:
+    - intent: check_balance
+    - action: balance_form
+    - active_loop: balance_form
+
+- rule: Submit balance form
+  condition:
+    - active_loop: balance_form
+  steps:
+    - action: balance_form
+    - active_loop: null
+    - action: utter_show_balance
+
+- rule: Activate transfer money form
+  steps:
+  - intent: transfer_money
+  - action: transfer_money_form
+  - active_loop: transfer_money_form
+  wait_for_user_input: false
+
+
+- rule: Submit transfer money form
+  condition:
+  - active_loop: transfer_money_form
+  steps:
+  - action: transfer_money_form
+  - active_loop: null
+  - slot_was_set:
+          - receiver_name: true
+          - amount: true
+  - action: utter_transfer_success
+
+- rule: Activate loan application form
+  steps:
+      - intent: apply_loan
+      - action: loan_application_form
+      - active_loop: loan_application_form
+
+- rule: Submit loan application form
+  condition:
+  - active_loop: loan_application_form
+  steps:
+      - action: loan_application_form
+      - active_loop: null
+      - action: utter_submit_loan_application
+
+- rule: Activate pay bill form
+  steps:
+    - intent: pay_bill
+    - action: pay_bill_form
+    - active_loop: pay_bill_form
+
+- rule: Submit pay bill form
+  condition:
+    - active_loop: pay_bill_form
+  steps:
+    - action: pay_bill_form
+    - active_loop: null
+    - action: utter_bill_paid
+
+- rule: Activate card application form
+  steps:
+    - intent: apply_card
+    - action: card_application_form
+    - active_loop: card_application_form
+
+- rule: Submit card application form
+  condition:
+    - active_loop: card_application_form
+  steps:
+    - action: card_application_form
+    - active_loop: null
+    - action: utter_submit_card_application
+
+- rule: Say Goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: Help
+  steps:
+    - intent: help
+    - action: utter_help
+
+- rule: Contact Support
+  steps:
+    - intent: contact_support
+    - action: utter_contact_support
+
+- rule: Feedback
+  steps:
+    - intent: feedback
+    - action: utter_feedback
+
+- rule: Out of Scope
+  steps:
+    - intent: out_of_scope
+    - action: utter_out_of_scope
+
+- rule: Fallback
+  steps:
+    - intent: nlu_fallback
+    - action: utter_ask_rephrase        
+
+- rule: Stop form (simple)
+  steps:
+  - intent: stop
+  - action: action_deactivate_loop

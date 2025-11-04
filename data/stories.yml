@@ -1,0 +1,33 @@
+version: "3.1"
+
+stories:
+- story: apply for card flow
+  steps:
+    - intent: apply_card
+    - action: card_application_form
+    - active_loop: card_application_form
+    - active_loop: null
+    - action: utter_submit_card_application
+
+- story: show recent transactions
+  steps:
+  - intent: show_recent_transactions
+  - action: utter_ask_account_number
+  - intent: provide_account_number
+  - action: action_show_recent_transactions
+
+- story: check balance story
+  steps:
+  - intent: check_balance
+  - action: utter_ask_account_type
+  - intent: provide_account_type
+  - action: utter_ask_account_number
+  - intent: provide_account_number
+  - action: action_check_balance
+
+- story: Stop form flow
+  steps:
+  - intent: stop
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_goodbye  
