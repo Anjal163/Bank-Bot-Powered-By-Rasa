@@ -49,19 +49,14 @@ nlu:
     - no way
     - not really
 
+# Account Basics
+
 - intent: open_account
   examples: |
       - I want to open a bank account
       - Can I open a new account?
       - I would like to open an account
       - Open a new bank account
-
-- intent: provide_name
-  examples: |
-      - My name is [Anjal](name)
-      - I am [Anjal](name)
-      - It's [Anjal Nigam](name)
-      - [John Doe](name)
 
 - intent: provide_account_type
   examples: |
@@ -70,11 +65,131 @@ nlu:
       - [Savings](account_type)
       - I prefer [current](account_type)
 
-- intent: provide_deposit
+- intent: minimum_balance
   examples: |
-      - I want to deposit [5000](deposit_amount)
-      - My initial deposit is [10000](deposit_amount)
-      - [2000](deposit_amount)
+    - What is the minimum balance required?
+    - Tell me the minimum balance
+    - How much minimum balance should I maintain?
+    - What's the minimum balance for my account?
+    - How much balance should I keep in my account?
+    - Do I need to maintain any minimum balance?
+    - Is there any minimum balance rule?
+    - What is the required minimum amount in account?
+    - How much money should always be in the account?
+    - What is the minimum balance criteria?
+    - Please tell me about the minimum balance requirement
+    - Minimum balance?
+    - Is there any minimum balance limit?
+    - How much do I need to keep to avoid penalties?
+    - What happens if I don’t maintain minimum balance?
+
+- intent: account_status
+  examples: |
+    - How can I check if my account is active or frozen?
+    - How do I know if my account is active?
+    - Is my account still active?
+    - Can you tell me if my account is blocked?
+    - I want to know if my account is frozen
+    - Is my account working properly?
+    - How do I check my account status?
+    - Tell me the status of my bank account
+    - Is my account deactivated?
+    - Can I see if my account is active?
+    - Please check if my account is operational
+    - Is my account open or closed?
+    - I think my account is blocked, how to confirm?
+    - Can you verify if my account is active?
+    - How can I confirm that my account is not frozen?
+
+- intent: close_account
+  examples: |
+    - How do I close my account?
+    - I want to close my account
+    - Please help me close my bank account
+    - What is the process to close my account?
+    - Can I delete my bank account permanently?
+    - How can I deactivate my account?
+    - I wish to close my savings account
+    - Tell me how to terminate my account
+    - I want to shut down my account
+    - What are the steps to close a bank account?
+    - How do I request account closure?
+    - I need to close my current account
+    - Can you assist me with account closure?
+    - What documents are required to close my account?
+    - How can I stop using this account permanently?
+
+- intent: dormant_account_reactivation
+  examples: |
+    - My account became dormant. How do I reactivate it?
+    - How can I reactivate my dormant account?
+    - My account is inactive, what should I do?
+    - How do I make my account active again?
+    - How to restart my dormant bank account?
+    - I want to activate my dormant account
+    - What is the process to reactivate a dormant account?
+    - My account is frozen due to inactivity, please help
+    - Can you tell me how to activate my dormant account?
+    - I didn’t use my account for a long time, how do I reactivate it?
+
+
+- intent: nominee_details
+  examples: |
+    - How can I add or change my nominee?
+    - I want to update my nominee details
+    - How do I add a nominee to my account?
+    - Can I change my nominee name?
+    - What’s the process to update my nominee information?
+    - Please tell me how to register a nominee
+    - How can I modify the nominee details for my account?
+    - I want to replace my existing nominee
+    - How to update nominee in my savings account?
+    - Is it possible to change the nominee in my bank account?
+
+
+- intent: joint_account_info
+  examples: |
+    - Can I open a joint account?
+    - How do I open a joint account?
+    - I want to open a joint bank account
+    - What are the requirements for a joint account?
+    - Tell me about joint account opening process
+    - Can two people share one account?
+    - Is joint account facility available?
+    - How many people can open a joint account?
+    - Can I open a joint account with my spouse?
+    - What documents are needed for a joint account?
+
+
+- intent: update_personal_details
+  examples: |
+    - How do I update my address, phone, or email?
+    - I want to change my contact details
+    - How can I update my personal information?
+    - My phone number has changed, what should I do?
+    - How to update my address in bank records?
+    - Please help me update my email ID
+    - What is the process to change my registered mobile number?
+    - How can I modify my account details?
+    - I moved to a new address, how do I update it?
+    - I need to update my personal details in the bank system
+    - i want to update details
+
+
+- intent: account_number_lost
+  examples: |
+    - I forgot my account number. What should I do?
+    - I lost my account number, please help
+    - How can I find my account number?
+    - I can’t remember my account number
+    - What to do if I forget my bank account number?
+    - How to recover my account number?
+    - I misplaced my account number, how to get it back?
+    - Can you tell me my account number?
+    - I don’t know my account number, how to retrieve it?
+    - Is there any way to check my account number online?
+
+# Balance and Transaction
 
 - intent: check_balance
   examples: |
@@ -85,56 +200,313 @@ nlu:
     - balance inquiry
     - what's my balance
 
-- regex: account_number
-  examples: |
-    - \d{7,12}
+# - intent: mini_statement
+#   examples: |
+#     - Can you show my last 5 transactions?
+#     - Show me my recent transactions
+#     - Display my mini statement
+#     - I want to see my last few transactions
+#     - Give me the last 5 transaction details
+#     - What are my last transactions?
+#     - Show me my recent bank activity
+#     - Please provide my mini statement
+#     - Can I get a list of my last five debits and credits?
+#     - Display recent account activity
 
-- intent: provide_account_number
-  examples: |
-    - My account number is [1234522](account_number)
-    - It's [6789022](account_number)
-    - [1111122](account_number)
-    - [2222211](account_number)
-    - account number is [1234567822](account_number)
-    - [9876543210](account_number)
-    - [1122334455](account_number)
-    - [5544332211](account_number)
-    - The account number is [123456789](account_number)
-    - acc no [987654321](account_number)
-    - [111222333](account_number)
-    - [444555666](account_number)
-    - [777888999](account_number)
-    - my acc number [123123123](account_number)
 
-- intent: transfer_money
+- intent: transaction_history
   examples: |
-    - I want to transfer money
-    - transfer funds
-    - send money
-    - make a transfer
-    - I want to send money
+    - How do I see all my past transactions?
+    - Show me my complete transaction history
+    - I want to check all my old transactions
+    - How can I view full transaction details?
+    - Display my entire transaction record
+    - Please show all my previous transactions
+    - I want to see my transaction history for this month
+    - Give me a list of all my transactions
+    - How do I access my transaction logs?
+    - Show my full account transaction statement
 
-- intent: provide_receiver_name
-  examples: |
-    - [Anil](receiver_name)
-    - receiver name is [Ravi](receiver_name)
-    - to [Priya](receiver_name)
-    - [John](receiver_name)
-    - [Anuj](receiver_name)
-    - [Ravi](receiver_name)
 
-- intent: provide_amount
+- intent: transaction_status
   examples: |
-    - [500](bill_amount)
-    - [1200](bill_amount)
-    - [300](bill_amount)
-    - It's [700](bill_amount)
-    - I want to pay [900](bill_amount)
-    - The amount is [450](bill_amount)
-    - Pay [1500](bill_amount)
-    - bill is [2500](bill_amount)
-    - [350](bill_amount) rupees
-    - [4500](bill_amount) only
+    - How can I check if a transaction is successful or pending?
+    - I want to check my transaction status
+    - How do I know if my transaction went through?
+    - Please tell me if my payment was successful
+    - How to verify the status of my transaction?
+    - Did my transfer go through?
+    - How can I find out if my transaction failed?
+    - Is my transaction pending or completed?
+    - Check transaction status for me
+    - How can I confirm a successful transfer?
+
+
+- intent: fund_transfer
+  examples: |
+    - How do I transfer money to another account?
+    - I want to transfer funds
+    - Please help me send money to someone
+    - How can I send money online?
+    - I need to transfer amount to another account
+    - What is the process to transfer funds?
+    - Can I transfer money to another bank?
+    - Tell me how to do a bank transfer
+    - How to transfer funds using mobile banking?
+    - Help me send money to another person’s account
+
+
+- intent: transfer_limit
+  examples: |
+    - What is the maximum transfer limit?
+    - How much money can I transfer at once?
+    - What’s the daily transfer limit?
+    - Is there a limit for online fund transfer?
+    - How much amount can I send through NEFT/IMPS/RTGS?
+    - Tell me my transfer limit
+    - How much can I transfer per day?
+    - What is the maximum amount allowed for transfer?
+    - Is there any restriction on money transfer?
+    - What’s the upper limit for transferring funds?
+
+
+- intent: wrong_transfer
+  examples: |
+    - I transferred to the wrong account, can I get it back?
+    - I sent money to the wrong person
+    - What should I do if I transfer to the wrong account?
+    - Can a wrong transfer be reversed?
+    - I entered wrong account details, please help
+    - I made a mistake while transferring money
+    - How to recover money from wrong transfer?
+    - I want to get back the money I sent by mistake
+    - Can I cancel a transfer I sent to the wrong account?
+    - I accidentally transferred money to the wrong account
+
+
+- intent: reversal_time
+  examples: |
+    - How long does it take for a failed transaction refund?
+    - When will I get my refund for failed transaction?
+    - What is the refund time for failed payments?
+    - How much time does reversal take?
+    - My transaction failed, when will I get my money back?
+    - How many days for refund to reflect?
+    - Tell me the time for transaction reversal
+    - How long does it take for the amount to be credited back?
+    - When can I expect the refund for failed transfer?
+    - I haven’t received refund for failed transaction yet
+
+
+- intent: bank_charges
+  examples: |
+    - What are the service charges for transfers?
+    - Are there any fees for fund transfers?
+    - Tell me the bank charges for NEFT or IMPS
+    - How much does the bank charge for transactions?
+    - Are transfers free or charged?
+    - What are the transaction charges?
+    - What’s the fee for sending money to another account?
+    - Do you charge for RTGS or IMPS?
+    - Please tell me about bank transfer fees
+    - What are the charges for using online banking services?
+
+
+- intent: auto_debit_enquiry
+  examples: |
+    - What is auto-debit and how do I enable/disable it?
+    - How can I activate auto debit for my account?
+    - I want to disable automatic payment
+    - Tell me how auto-debit works
+    - How to set up auto debit for bills?
+    - Can I stop auto-debit for my account?
+    - How do I enable recurring auto debit?
+    - I want to cancel auto-debit feature
+    - What does auto debit mean in banking?
+    - How can I manage my auto-debit settings?
+
+# Debit and Credit Card
+
+- intent: apply_debit_card
+  examples: |
+    - How can I apply for a debit/ATM card?
+    - I want to apply for a new debit card
+    - Please tell me how to get an ATM card
+    - How to get a new debit card from the bank?
+    - What is the process for applying for a debit card?
+    - Can I apply for a replacement debit card?
+    - How do I request a new ATM card online?
+    - I lost my old card, how can I get a new one?
+    - Help me apply for a debit card
+    - I need a new ATM card
+
+
+- intent: apply_credit_card
+  examples: |
+    - How can I apply for a credit card?
+    - I want to get a new credit card
+    - Tell me the process to apply for a credit card
+    - Can I apply for a credit card online?
+    - What documents are needed for a credit card?
+    - How to apply for a bank credit card?
+    - I’m interested in a credit card, how can I get one?
+    - Please guide me to apply for a credit card
+    - How do I get a new credit card issued?
+    - Apply for a new credit card
+
+
+- intent: card_delivery_status
+  examples: |
+    - How do I check the status of my card delivery?
+    - Where is my debit card now?
+    - Has my card been dispatched yet?
+    - I want to track my card delivery
+    - When will my card arrive?
+    - How can I check if my card has been delivered?
+    - Tell me the delivery status of my new card
+    - Is my debit card on the way?
+    - How long will it take to receive my card?
+    - Please track my credit card delivery
+
+
+- intent: block_card
+  examples: |
+    - I lost my card. How do I block it?
+    - I misplaced my debit card, please block it
+    - How can I block my ATM card immediately?
+    - My card is stolen, what should I do?
+    - I want to block my card right now
+    - Tell me how to block my lost card
+    - I need to stop transactions on my card
+    - How do I temporarily block my credit card?
+    - Block my debit card please
+    - I’ve lost my card, disable it for security
+
+
+- intent: unblock_card
+  examples: |
+    - How can I unblock my card?
+    - My card is blocked, please help me unblock it
+    - I want to reactivate my debit card
+    - How to unblock my ATM card?
+    - Please tell me how to unblock my credit card
+    - My card got blocked, how can I enable it again?
+    - I entered the wrong PIN multiple times, how to unblock?
+    - Help me unlock my card
+    - I need to activate my blocked card
+    - Can I unblock my card through mobile banking?
+
+- intent: set_pin
+  examples: |
+    - How can I set or change my ATM PIN?
+    - I forgot my card PIN, how do I reset it?
+    - How to change my debit card PIN?
+    - Tell me how to generate ATM PIN
+    - I want to set a new PIN for my card
+    - How to reset my PIN using mobile banking?
+    - My PIN isn’t working, how can I update it?
+    - I want to create a new PIN
+    - Please help me change my ATM PIN
+    - How to generate PIN for my new debit card?
+
+
+- intent: card_limit_change
+  examples: |
+    - Can I increase or decrease my card limit?
+    - How can I change my card limit?
+    - I want to increase my credit card limit
+    - Can I lower my debit card transaction limit?
+    - What’s the process to modify card limit?
+    - Tell me how to change my spending limit
+    - Is it possible to adjust my card limit?
+    - I want to raise my transaction limit
+    - How do I set a daily card limit?
+    - Can I modify my withdrawal limit?
+
+
+- intent: international_usage
+  examples: |
+    - How can I enable international transactions on my card?
+    - I want to use my card abroad
+    - How to activate my card for international use?
+    - Can I make foreign payments with my card?
+    - My card is not working internationally, what should I do?
+    - Please enable global usage for my debit card
+    - How to turn on international usage on my credit card?
+    - Is international transaction available for my card?
+    - Can I use my card outside India?
+    - Enable foreign transactions for my account
+
+
+- intent: card_expiry_renewal
+  examples: |
+    - What happens when my card expires?
+    - My debit card expired, what should I do?
+    - How do I renew my expired card?
+    - Will I get a new card automatically after expiry?
+    - How can I request a replacement for expired card?
+    - My card is about to expire, please help
+    - When will my new card arrive after expiry?
+    - Do I need to reapply for an expired debit card?
+    - What to do after card expiry?
+    - Card expired, how do I reactivate it?
+
+
+- intent: card_declined_reason
+  examples: |
+    - Why was my card declined even with sufficient balance?
+    - My transaction failed even though I have money
+    - Why did my card get declined?
+    - Card is not working, but balance is there
+    - Why is my card being rejected?
+    - My payment was declined, please explain
+    - Why was my card refused at the POS machine?
+    - Transaction failed, but account has funds
+    - Card not accepted, what’s the reason?
+    - Why is my card showing insufficient balance when it’s not?
+
+# Deposits and Loans
+
+- intent: open_fd
+  examples: |
+    - How can I open a fixed deposit account?
+    - I want to open an FD account
+    - How do I start a fixed deposit?
+    - Tell me the process to open a fixed deposit
+    - Can I open an FD online?
+    - How to create a fixed deposit in my account?
+    - I want to invest in an FD
+    - What is the procedure to open an FD account?
+    - Please help me open a fixed deposit
+    - How do I start a new FD through net banking?
+
+
+- intent: close_fd
+  examples: |
+    - Can I close my FD before maturity?
+    - How can I close my fixed deposit?
+    - I want to withdraw my FD early
+    - What is the process to break an FD?
+    - Can I close my FD before the end date?
+    - How to cancel my fixed deposit?
+    - Please tell me how to close my FD
+    - I want to break my fixed deposit account
+    - Can I withdraw my fixed deposit amount anytime?
+    - How do I prematurely close my FD?
+
+
+- intent: fd_interest_rate
+  examples: |
+    - What are the current FD interest rates?
+    - Tell me the latest fixed deposit rates
+    - What is the FD rate right now?
+    - How much interest will I get on FD?
+    - What are the interest rates for fixed deposits?
+    - Please share the FD interest rate details
+    - How much return do I get on a fixed deposit?
+    - Show me the current FD rates
+    - What’s the present rate of interest for FD?
+    - I want to know about FD interest rates
 
 - intent: apply_loan
   examples: |
@@ -150,83 +522,725 @@ nlu:
     - It should be a [home](loan_type) loan
     - I need a [car](loan_type) loan
 
-- intent: pay_bill
+- intent: loan_eligibility
   examples: |
-    - I want to pay bill
-    - I want to pay my bill
-    - I want to pay electricity bill
-    - I need to pay gas bill
-    - I want to pay broadband bill
-    - pay my bill
-    - pay bill
-    - I want to make bill payment    
+    - Am I eligible for a loan?
+    - How can I check my loan eligibility?
+    - Do I qualify for a personal loan?
+    - What are the eligibility criteria for a loan?
+    - Tell me if I am eligible for a home loan
+    - Can I get a loan from the bank?
+    - How do I know if I can apply for a loan?
+    - I want to check my loan eligibility
+    - Who is eligible for a bank loan?
+    - Can you check if I’m eligible for a loan?
 
-- intent: provide_bill_type
-  examples: |
-    - [gas](bill_type)
-    - [electricity](bill_type)
-    - [broadband](bill_type)
-    - I want to pay [gas](bill_type) bill
-    - I want to pay [electricity](bill_type) bill
-    - It's a [broadband](bill_type) bill
-    - I need to pay my [gas](bill_type) bill
 
-- intent: provide_bill_amount
+- intent: loan_interest_rate
   examples: |
-    - [500](bill_amount)
-    - [1200](bill_amount)
-    - [300](bill_amount)
-    - It's [700](bill_amount)
-    - I want to pay [900](bill_amount)
-    - The amount is [450](bill_amount)
-    - Pay [1500](bill_amount)
+    - What is the current interest rate for loans?
+    - Tell me the latest loan interest rates
+    - What is the rate of interest for a personal loan?
+    - How much interest does the bank charge on loans?
+    - What are the home loan interest rates right now?
+    - Please share the loan interest rate details
+    - I want to know the current loan rates
+    - What is the interest rate for education loans?
+    - Show me the latest loan interest percentages
+    - How much interest will I have to pay on a loan?
 
-- intent: apply_card
-  examples: |
-    - I want to apply for a card
-    - I need a new card
-    - I want a debit card
-    - I want a credit card
-    - I want to apply for debit card
-    - I want to apply for credit card
 
-- intent: provide_card_type
+- intent: loan_repayment
   examples: |
-    - [credit card](card_type)
-    - [debit card](card_type)
-    - I want a [credit card](card_type)
-    - I need a [debit card](card_type)
-    - [credit](card_type)
-    - [debit](card_type)
-    - I want [credit](card_type)
-    - I want [debit](card_type)
-    - [Credit Card](card_type)
-    - [Debit Card](card_type)
-    - I want [Credit Card](card_type)
-    - I want [Debit Card](card_type)
+    - How can I repay my loan or check EMI details?
+    - How do I make a loan payment?
+    - I want to pay my EMI
+    - Tell me how to repay my loan
+    - How can I check my EMI schedule?
+    - Please show my loan repayment details
+    - How do I pay my monthly installment?
+    - I want to see my EMI plan
+    - What is the process to repay my loan amount?
+    - How to pay my loan EMI online?
 
-- lookup: card_type
-  examples: |
-    - credit card
-    - debit card
-    - credit
-    - debit
-    - Credit Card
-    - Debit Card
 
-- synonym: credit card
+- intent: emi_due_date
   examples: |
-    - credit
-    - Credit Card
-    - credit card
-    - CREDIT CARD
+    - When is my next EMI due?
+    - What is my EMI payment date?
+    - Tell me my upcoming EMI due date
+    - When do I have to pay my next EMI?
+    - Show me the due date for my loan payment
+    - When is my next installment scheduled?
+    - I want to know my EMI schedule
+    - Please tell me when my EMI is due
+    - How do I check my EMI due date?
+    - Next EMI date please
 
-- synonym: debit card
+
+- intent: loan_statement
   examples: |
-    - debit
-    - Debit Card
-    - debit card
-    - DEBIT CARD
+    - Can I get my loan statement?
+    - I want to see my loan statement
+    - How can I download my loan statement?
+    - Please show my loan account details
+    - How do I get a copy of my loan statement?
+    - Tell me my loan summary
+    - I need the statement of my loan
+    - Show me my loan transactions
+    - Can I view my loan statement online?
+    - How to check loan statement through mobile banking?
+
+
+- intent: loan_default_penalty
+  examples: |
+    - What happens if I miss an EMI payment?
+    - What are the penalties for missing a loan EMI?
+    - Will I be charged if I delay my EMI?
+    - What happens if I don’t pay my loan on time?
+    - Is there any fine for EMI delay?
+    - What if I skip an EMI payment?
+    - Tell me the charges for EMI default
+    - What are the consequences of missing EMI payments?
+    - What if I’m unable to pay my EMI this month?
+    - Does missing EMI affect my credit score?
+
+# Digital & Online Banking
+
+- intent: register_netbanking
+  examples: |
+    - How do I register for net banking?
+    - I want to activate internet banking
+    - Please help me register for online banking
+    - How can I enable net banking for my account?
+    - What is the process to sign up for net banking?
+    - I want to create a net banking account
+    - How do I get access to online banking?
+    - Can I register for internet banking online?
+    - Tell me how to start using net banking
+    - How to activate net banking for my savings account?
+
+
+- intent: register_mobilebanking
+  examples: |
+    - How do I register for mobile banking?
+    - I want to use mobile banking
+    - Please help me activate mobile banking
+    - How can I enable mobile banking on my phone?
+    - What is the process to register for mobile banking?
+    - How do I download and register on the mobile banking app?
+    - I want to start using the bank’s mobile app
+    - How to activate mobile banking service?
+    - Can I register for mobile banking online?
+    - Guide me to set up mobile banking
+
+
+- intent: reset_password
+  examples: |
+    - I forgot my login password. How can I reset it?
+    - I want to reset my net banking password
+    - My password is not working, what should I do?
+    - How to recover my online banking password?
+    - Please help me reset my login credentials
+    - I forgot my password for internet banking
+    - How can I create a new login password?
+    - How to reset password using OTP?
+    - I need to change my net banking password
+    - Password reset help please
+
+
+- intent: two_factor_auth
+  examples: |
+    - What is two-factor authentication?
+    - Explain two-step verification
+    - How does 2FA work in banking?
+    - Why do I need two-factor authentication?
+    - What is 2FA?
+    - Tell me more about two-factor authentication
+    - Is 2FA required for online transactions?
+    - How does two-factor authentication protect my account?
+    - What does two-step login mean?
+    - Explain the benefit of 2FA
+
+
+- intent: upi_registration
+  examples: |
+    - How can I link my account with UPI?
+    - I want to register for UPI
+    - Please help me set up UPI
+    - How do I connect my bank account to UPI?
+    - I want to activate UPI on my phone
+    - What is the process for UPI registration?
+    - How can I create my UPI ID?
+    - How to register for UPI in my bank app?
+    - I want to start using UPI payments
+    - Help me link my account with UPI service
+
+
+- intent: upi_limit
+  examples: |
+    - What is the daily limit for UPI transactions?
+    - How much money can I transfer through UPI per day?
+    - Tell me my UPI transaction limit
+    - What is the maximum amount I can send using UPI?
+    - Is there a limit for UPI payments?
+    - What’s the UPI transfer cap per day?
+    - How much can I pay through UPI daily?
+    - Are there any limits for UPI transfers?
+    - Maximum UPI transaction amount?
+    - UPI daily transfer limit please
+
+
+- intent: upi_failed_transaction
+  examples: |
+    - My UPI payment failed but money was deducted.
+    - I sent money via UPI, but it didn’t reach the receiver
+    - UPI transaction failed, what should I do?
+    - Money deducted but payment not received
+    - What happens if UPI transfer fails?
+    - UPI payment stuck, please help
+    - How long will it take for UPI refund?
+    - My UPI payment failed, when will I get refund?
+    - I didn’t receive the UPI amount
+    - Transaction failed on UPI, but balance reduced
+
+
+- intent: security_settings
+  examples: |
+    - How can I keep my online banking secure?
+    - Give me tips to secure my bank account
+    - How to protect my account from fraud?
+    - What are the best security practices for internet banking?
+    - How can I make online transactions safe?
+    - How to ensure my account is secure?
+    - Tell me how to protect my banking details
+    - How do I safeguard my bank account online?
+    - Share some online banking security tips
+    - How to stay safe while using mobile banking?
+
+
+- intent: update_mpin
+  examples: |
+    - How do I change my UPI PIN or MPIN?
+    - I forgot my UPI PIN, how can I reset it?
+    - How can I create a new MPIN?
+    - Please tell me how to change UPI PIN
+    - How to update my MPIN for mobile banking?
+    - My MPIN is not working, help me reset it
+    - How to reset UPI PIN through app?
+    - I want to modify my UPI PIN
+    - Change MPIN settings please
+    - Help me recover my UPI PIN
+
+
+- intent: email_alerts
+  examples: |
+    - How can I enable or disable email/SMS alerts?
+    - I want to stop getting SMS alerts
+    - How do I turn on email notifications for my account?
+    - Can I manage my SMS alert settings?
+    - I want to change my alert preferences
+    - How to activate transaction alerts?
+    - Please tell me how to enable email alerts
+    - I want to receive messages for every transaction
+    - How can I stop receiving bank notifications?
+    - How to manage email and SMS alerts for my account?
+
+# Statements & Certificates
+
+- intent: download_statement
+  examples: |
+    - How do I download my bank statement?
+    - I want to download my account statement
+    - Please tell me how to get my statement online
+    - How can I get a copy of my bank statement?
+    - Where can I download my transaction statement?
+    - I want to see my monthly bank statement
+    - How do I download statement from mobile app?
+    - Help me get my account statement in PDF
+    - How can I view and save my statement?
+    - Show me how to download last month’s statement
+
+
+- intent: interest_certificate
+  examples: |
+    - How can I get my interest certificate for tax filing?
+    - I need my interest certificate
+    - Please help me download my interest certificate
+    - Where can I get my FD interest certificate?
+    - How to get bank interest certificate online?
+    - I want my annual interest certificate for tax purposes
+    - How do I obtain my savings account interest certificate?
+    - Can I get interest certificate from mobile banking?
+    - Help me find my interest certificate for income tax
+    - How do I generate interest certificate for this financial year?
+
+
+- intent: tds_details
+  examples: |
+    - Where can I find TDS details deducted by the bank?
+    - How do I check TDS deducted on my account?
+    - Please tell me how to view TDS information
+    - I want to know how much TDS has been deducted
+    - How can I get TDS certificate from bank?
+    - Where can I check TDS details for my FD?
+    - How do I download TDS summary?
+    - Can I see TDS deductions in my account statement?
+    - Show me TDS deducted details
+    - Help me find TDS details for tax filing
+
+
+- intent: check_passbook_status
+  examples: |
+    - How can I update my passbook?
+    - I want to update my passbook entries
+    - Where can I update my passbook?
+    - My passbook is outdated, please help
+    - How do I get my passbook printed?
+    - Can I update my passbook at any branch?
+    - I need to print recent transactions in my passbook
+    - How to get my passbook updated?
+    - Where can I get my passbook updated?
+    - Tell me the process for passbook update
+
+
+- intent: duplicate_statement_request
+  examples: |
+    - Can I request a duplicate statement?
+    - I lost my bank statement, can I get another one?
+    - How do I get a duplicate account statement?
+    - Please issue a duplicate statement
+    - I need a copy of my old statement
+    - My bank statement is missing, how to get a new one?
+    - How can I request duplicate statement online?
+    - Can I get a duplicate statement from the branch?
+    - I want a duplicate of my last month’s statement
+    - How to apply for a duplicate statement?
+
+# Security & Support
+
+- intent: report_fraud
+  examples: |
+    - I suspect fraud on my account. What should I do?
+    - There’s unauthorized activity on my account
+    - Someone used my account without my permission
+    - I think my account has been hacked
+    - How can I report a fraudulent transaction?
+    - I saw suspicious transactions on my account
+    - Please help me report a fraud
+    - My money has been stolen from my account
+    - How do I raise a fraud complaint?
+    - I think there’s a scam happening with my account
+
+
+- intent: phishing_alert
+  examples: |
+    - What should I do if I receive a fake bank message or call?
+    - I got a suspicious message asking for my bank details
+    - Someone called pretending to be from the bank
+    - I received a phishing email, what should I do?
+    - How do I report fake bank calls or messages?
+    - I think I clicked a fake bank link by mistake
+    - How to handle phishing scams?
+    - Please help me report a fraudulent bank message
+    - What should I do if I shared my OTP accidentally?
+    - I got a fake message from the bank, please guide me
+
+
+- intent: account_lock
+  examples: |
+    - My online account is locked. How do I unlock it?
+    - I can’t log in to my account, it says locked
+    - How can I unlock my net banking account?
+    - My internet banking access is blocked
+    - Please help me unlock my mobile banking account
+    - I entered wrong password multiple times, now my account is locked
+    - What should I do if my online account is locked?
+    - I’m unable to access online banking, it’s locked
+    - How can I reactivate my locked account?
+    - My netbanking is locked, help me reset it
+
+
+- intent: privacy_policy
+  examples: |
+    - How does the bank protect my data?
+    - What is your privacy policy?
+    - How do you ensure customer data safety?
+    - Is my personal information secure with the bank?
+    - How does the bank handle my private information?
+    - Tell me how my banking data is protected
+    - Do you share my details with third parties?
+    - What security measures are taken for customer privacy?
+    - Explain how my information is kept safe
+    - How is my data protected from leaks?
+
+
+- intent: customer_support_contact
+  examples: |
+    - What is the customer care number or email?
+    - How can I contact customer support?
+    - Please give me the bank’s helpline number
+    - I want to talk to customer service
+    - How do I reach customer care?
+    - Give me the email for support team
+    - I need to contact the bank
+    - Provide me customer service contact details
+    - Can you share the customer care helpline?
+    - What’s the bank’s toll-free number?
+
+# Education & Awareness
+
+- intent: difference_savings_current
+  examples: |
+    - What’s the difference between savings and current account?
+    - Tell me how savings and current accounts differ
+    - How is a savings account different from a current account?
+    - Please explain savings vs current account
+    - Difference between current account and savings account
+    - What are the benefits of savings account over current account?
+    - Which is better, savings or current account?
+    - Compare savings and current account features
+    - Savings account vs current account, explain
+    - What’s the use of a current account compared to savings?
+
+
+- intent: ifsc_meaning
+  examples: |
+    - What is IFSC and how is it used?
+    - Explain IFSC code in banking
+    - What does IFSC stand for?
+    - How does IFSC code work?
+    - Why do we need IFSC code?
+    - What’s the purpose of IFSC in bank transfers?
+    - Where can I find my bank’s IFSC code?
+    - What is the IFSC code used for?
+    - Meaning of IFSC please
+    - Tell me what IFSC means
+
+
+- intent: swift_code_info
+  examples: |
+    - What is a SWIFT code?
+    - Explain SWIFT in banking
+    - What does SWIFT code mean?
+    - How do I find my bank’s SWIFT code?
+    - Why is SWIFT code required for international transfers?
+    - What is the use of SWIFT code?
+    - Where can I get my bank’s SWIFT number?
+    - Tell me more about SWIFT codes
+    - What is SWIFT code used for?
+    - Meaning of SWIFT in banking
+
+
+- intent: neft_vs_imps_vs_rtgs
+  examples: |
+    - Difference between NEFT, IMPS, and RTGS?
+    - How is NEFT different from RTGS and IMPS?
+    - Tell me the difference between IMPS, NEFT, and RTGS
+    - Which is faster, NEFT or RTGS?
+    - Explain NEFT vs IMPS vs RTGS
+    - What’s the difference between these transfer methods?
+    - When should I use NEFT, IMPS, or RTGS?
+    - Compare NEFT, IMPS, and RTGS
+    - Which transfer mode is instant?
+    - What are the timings for NEFT, IMPS, and RTGS?
+
+
+- intent: nominee_importance
+  examples: |
+    - Why should I add a nominee to my account?
+    - What is the importance of having a nominee?
+    - Why do banks ask for nominee details?
+    - Is it necessary to add a nominee?
+    - What happens if I don’t have a nominee?
+    - Explain the benefit of adding a nominee
+    - Why is a nominee important in banking?
+    - Should I add a nominee to my savings account?
+    - Tell me why nominee details are required
+    - What’s the purpose of adding a nominee?
+
+
+- intent: cibil_score
+  examples: |
+    - What is a CIBIL score and why is it important?
+    - Explain CIBIL score
+    - Why is CIBIL score needed for loans?
+    - What does my credit score mean?
+    - How can I improve my CIBIL score?
+    - What is a good CIBIL score?
+    - How is CIBIL score calculated?
+    - Why is my CIBIL score low?
+    - What’s the use of CIBIL score in banking?
+    - Tell me more about credit score importance
+
+
+- intent: rbi_guidelines
+  examples: |
+    - Where can I find RBI guidelines for online banking?
+    - What are RBI rules for internet banking?
+    - Please tell me RBI’s regulations for digital banking
+    - How does RBI regulate online banking?
+    - Where can I read RBI circulars about banking?
+    - What are RBI policies on UPI and online transactions?
+    - Tell me RBI guidelines for secure online banking
+    - What does RBI say about digital payments?
+    - How does RBI ensure safe internet banking?
+    - Where can I find RBI’s official guidelines?
+
+
+- intent: inactive_account_fees
+  examples: |
+    - Are there charges for not using my account?
+    - What happens if my account is inactive?
+    - Do banks charge for dormant accounts?
+    - Will I be fined for not using my account?
+    - Is there any fee for inactive account?
+    - How long before my account becomes inactive?
+    - Are there charges for a dormant savings account?
+    - What happens if I don’t use my account for a year?
+    - Tell me about charges for unused account
+    - Inactive account fee details please
+
+
+- intent: cash_deposit_limit
+  examples: |
+    - What’s the maximum cash deposit limit?
+    - How much cash can I deposit in my account per day?
+    - Is there a limit on cash deposits?
+    - Tell me daily cash deposit limit
+    - What is the maximum cash deposit allowed?
+    - How much cash can I deposit without PAN?
+    - What are the RBI limits for cash deposits?
+    - Is there any restriction on cash deposits?
+    - Maximum cash deposit in a day?
+    - How much money can I deposit at once?
+
+
+- intent: daily_withdrawal_limit
+  examples: |
+    - What’s the daily ATM withdrawal limit?
+    - How much money can I withdraw from ATM per day?
+    - What is the limit for daily cash withdrawal?
+    - How much cash can I take out in one day?
+    - What’s the maximum withdrawal from ATM?
+    - Tell me my debit card withdrawal limit
+    - Are there withdrawal limits for ATMs?
+    - How much can I withdraw using my card?
+    - ATM withdrawal limit per day?
+    - What is the maximum daily cash withdrawal limit?
+
+# Offers & Promotions
+
+- intent: credit_card_offers
+  examples: |
+    - What are the current offers on credit cards?
+    - Show me the latest credit card offers
+    - Are there any new credit card deals?
+    - What cashback offers are available on my credit card?
+    - Tell me about ongoing credit card discounts
+    - Any special offers for my credit card?
+    - What’s the latest promotion on credit cards?
+    - Do I have any active credit card rewards?
+    - Please share credit card benefits and offers
+    - What are the best credit card offers right now?
+
+
+- intent: loan_offers
+  examples: |
+    - Are there any loan offers available now?
+    - Tell me about current loan offers
+    - Do you have any special loan schemes?
+    - What are the latest personal loan offers?
+    - Any pre-approved loan offers for me?
+    - What loan promotions are available?
+    - Please share current loan offers and interest rates
+    - Are there any festive loan offers?
+    - How can I check for special loan deals?
+    - Show me all available loan offers
+
+
+- intent: rewards_points
+  examples: |
+    - How can I redeem my reward points?
+    - I want to use my reward points
+    - Tell me how to redeem credit card points
+    - What can I do with my reward points?
+    - How to check and use my earned points?
+    - Please help me redeem my loyalty points
+    - How do I claim my reward points?
+    - I want to convert my points into cashback
+    - Show me how to use my rewards
+    - Where can I redeem my points online?
+
+
+- intent: festive_offers
+  examples: |
+    - Do you have any festive cashback offers?
+    - Tell me about your Diwali or festive season offers
+    - What are the current festival offers?
+    - Any special discounts during the festival?
+    - Please share ongoing festive deals
+    - Are there cashback offers for festive shopping?
+    - What promotions are available this festival?
+    - Do you offer festive loan or credit deals?
+    - Any holiday offers on debit or credit cards?
+    - Tell me about festive season banking offers
+
+
+- intent: refer_friend
+  examples: |
+    - How does the refer & earn program work?
+    - I want to refer my friend to the bank
+    - Tell me about your referral program
+    - What is the process for refer and earn?
+    - How can I invite someone and earn rewards?
+    - Do you have a refer and earn offer?
+    - How do I refer a friend for an account or card?
+    - Please explain your referral scheme
+    - I want to refer my friend for a credit card
+    - How can I share my referral link to earn benefits?
+
+# Feedback & Miscellaneous
+
+- intent: update_kyc
+  examples: |
+    - How do I update my KYC details?
+    - I want to update my KYC
+    - Please tell me how to update KYC documents
+    - How can I submit my KYC online?
+    - What is the process to update KYC information?
+    - I need to update my PAN and address proof
+    - How can I refresh my KYC status?
+    - My KYC is expired, how to update it?
+    - Can I update my KYC through mobile banking?
+    - Help me complete my KYC update
+
+
+- intent: branch_locator
+  examples: |
+    - Where is the nearest branch or ATM?
+    - Show me nearby branches
+    - How can I find the nearest ATM?
+    - Where’s the closest bank branch?
+    - Help me locate the nearest branch
+    - Find an ATM near me
+    - Tell me where your nearest office is
+    - Is there any branch around my location?
+    - Where can I find the closest bank branch?
+    - Show me all nearby ATMs
+
+
+- intent: working_hours
+  examples: |
+    - What are the bank’s working hours?
+    - Tell me your branch timings
+    - When does the bank open and close?
+    - What are your office hours?
+    - Bank working time please
+    - What is your branch timing today?
+    - Are you open on Saturdays?
+    - What is the timing for customer service?
+    - When can I visit the branch?
+    - What are the bank opening hours?
+
+
+- intent: holiday_list
+  examples: |
+    - What are the upcoming bank holidays?
+    - Please share the holiday list
+    - When is the next bank holiday?
+    - Are banks open this weekend?
+    - Show me this year’s bank holidays
+    - Tell me about upcoming holidays
+    - Is the bank closed tomorrow?
+    - Which days are holidays this month?
+    - List all bank holidays for this year
+    - When is the next public holiday for banks?
+
+
+- intent: feedback_complaint
+  examples: |
+    - How can I submit feedback or file a complaint?
+    - I want to share my feedback
+    - How do I complain about a service issue?
+    - Please tell me how to report a problem
+    - I want to file a complaint against a transaction
+    - Where can I submit my feedback about service?
+    - How do I contact the grievance cell?
+    - I need to raise a complaint about my account
+    - Tell me how to give feedback or suggestions
+    - How can I report an issue to customer care?
+
+
+- intent: foreign_exchange
+  examples: |
+    - Do you provide foreign exchange or travel cards?
+    - Can I buy or sell foreign currency here?
+    - Do you issue forex cards?
+    - How can I get a foreign exchange service?
+    - Please tell me if you provide travel cards
+    - I need a forex card for traveling abroad
+    - Do you offer currency exchange service?
+    - Where can I get foreign currency from the bank?
+    - Can I get USD or Euro from your branch?
+    - Tell me how to get a travel card
+
+
+- intent: cheque_status
+  examples: |
+    - How do I check the status of my cheque?
+    - Please tell me whether my cheque is cleared
+    - Has my cheque been processed yet?
+    - I want to track my cheque status
+    - How can I check if my cheque was encashed?
+    - What is the current status of my cheque?
+    - Check whether my cheque has cleared or not
+    - How do I know if my cheque is pending?
+    - Show me my cheque processing status
+    - How can I confirm my cheque clearance?
+
+
+- intent: stop_cheque_payment
+  examples: |
+    - How can I stop a cheque payment?
+    - I want to cancel my cheque
+    - Please help me stop cheque number 12345
+    - How do I block a cheque that I issued?
+    - Can I stop payment for a cheque?
+    - I want to cancel the cheque before it’s cleared
+    - How to stop my cheque from getting encashed?
+    - Tell me how to stop cheque payment through net banking
+    - I need to block a cheque immediately
+    - What’s the process to cancel a cheque?
+
+
+- intent: cheque_book_request
+  examples: |
+    - How do I request a new cheque book?
+    - I want to order a new cheque book
+    - Please help me get a fresh cheque book
+    - How can I apply for a cheque book?
+    - What is the process for cheque book request?
+    - Can I get a new cheque book online?
+    - I need a new cheque book for my savings account
+    - How do I order cheque book through mobile banking?
+    - Please issue a cheque book for my account
+    - How can I get a replacement cheque book?
+
+
+- intent: locker_facility
+  examples: |
+    - How can I open a locker account?
+    - Do you provide locker facility?
+    - I want to rent a locker
+    - Tell me how to get a bank locker
+    - How do I apply for a locker facility?
+    - What are the charges for a locker?
+    - Can I open a locker in my branch?
+    - How can I get a safe deposit locker?
+    - Is locker service available in all branches?
+    - Please guide me to open a locker account
+
 
 - intent: help
   examples: |
@@ -235,18 +1249,6 @@ nlu:
     - assist me
     - I need help
 
-- intent: contact_support
-  examples: |
-    - contact support
-    - talk to support
-    - customer service
-
-- intent: feedback
-  examples: |
-    - give feedback
-    - feedback
-    - rate service
-
 - intent: out_of_scope
   examples: |
     - tell me a joke
@@ -254,16 +1256,113 @@ nlu:
     - order pizza
     - something unrelated
 
-- intent: show_recent_transactions
+- intent: nlu_fallback
   examples: |
-    - Show my recent transactions
-    - I want to see recent transactions
-    - recent transactions
-    - last transactions
+    - sorry, I didn’t get that
+    - I don’t understand what you mean
+    - what?
+    - huh?
+    - can you say that again?
+    - that didn’t make sense
+    - I’m confused
+    - not sure what you mean
+    - could you repeat that?
+    - please clarify
 
-- intent: stop
+
+- intent: provide_name
   examples: |
-    - stop
-    - cancel
-    - never mind
-    - forget it
+      - My name is [Anjal](name)
+      - I am [Anjal](name)
+      - It's [Anjal Nigam](name)
+      - [John Doe](name)
+
+- intent: provide_balance
+  examples: |
+      - I want to deposit [5000](balance)
+      - My initial deposit is [10000](balance)
+      - [2000](balance)
+
+- intent: provide_phone
+  examples: |
+    - My phone number is [1234567890](phone)
+    - It’s [9335092062](phone)
+    - [9898989898](phone)
+    - You can contact me on [9123456789](phone)
+    - My registered number is [9000000001](phone)
+    - The number is [9012345678](phone)
+    - Please note my mobile number [9876500000](phone)
+    - [9998887776](phone)
+    - my number is 9998887776
+    - phone number is 9998887776
+    - please update my mobile number to 9998887776
+
+- intent: update_phone_number
+  examples: |
+    - I want to update my personal details
+    - update my phone number
+    - change phone number
+    - I need to modify my contact number    
+
+- intent: provide_email
+  examples: |
+    - My email is [anjal@example.com](email)
+    - It’s [riya.sharma@bankmail.com](email)
+    - Use this email [user123@gmail.com](email)
+    - [neha.singh@yahoo.com](email)
+    - You can reach me at [rohit.verma@outlook.com](email)
+    - [priya@mybank.in](email)
+    - My registered email is [customer.support@bankmail.in](email)
+    - [megha.nair@gmail.com](email)
+
+- intent: provide_otp
+  examples: |
+    - 123456
+    - 456789
+    - 895953
+    - 778899
+    - OTP is 123456
+    - here is the OTP 456789
+    - my otp is 998877
+    - 112233
+    - 445566
+    - 556677
+
+  # Phone number: 10 digits (optionally with +91 or 0)
+- regex: phone
+  examples: |
+      - (\+91|0)?[6-9]\d{9}
+
+  # Email: standard email format
+- regex: email
+  examples: |
+      - [a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}
+
+  # Balance or amount (100 to 99999999 — adjustable)
+- regex: balance
+  examples: |
+      - [1-9][0-9]{2,7}
+
+- regex: otp
+  examples: |
+    - \d{6}
+    
+- lookup: balance
+  examples: |
+    - 100
+    - 200
+    - 300
+    - 400
+    - 500
+    - 1000
+    - 2000
+    - 5000
+    - 10000
+
+# - lookup: otp
+#   examples: |
+#     - 123456
+#     - 987654
+#     - 112233
+#     - 445566
+#     - 000111

@@ -18,6 +18,10 @@ pipeline:
 - name: FallbackClassifier
   threshold: 0.3
   ambiguity_threshold: 0.1
+- name: RegexFeaturizer
+  use_lookup_tables: true
+  use_regexes: true
+  use_word_boundaries: false  
 
 policies:
 - name: MemoizationPolicy
@@ -32,3 +36,4 @@ policies:
   epochs: 100
   constrain_similarities: true
 assistant_id: 20251027-192855-chewy-texture
+

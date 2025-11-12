@@ -1,40 +1,136 @@
 version: "3.1"
 
 intents:
+
+# 🔹 Account Management
+  - open_account #M
+  - provide_account_type
+  - minimum_balance #M
+  - account_status 
+  - close_account
+  - dormant_account_reactivation
+  - nominee_details
+  - joint_account_info
+  - update_personal_details #M
+  - account_number_lost #M
+
+  # 🔹 Balance & Transactions
+  - check_balance #M
+  # - mini_statement #M
+  - transaction_history 
+  - transaction_status
+  - fund_transfer
+  - transfer_limit
+  - wrong_transfer
+  - reversal_time
+  - bank_charges
+  - auto_debit_enquiry
+
+  # 🔹 Cards
+  - apply_debit_card #M
+  - apply_credit_card #M
+  - card_delivery_status 
+  - block_card #M
+  - unblock_card #M
+  - set_pin
+  - card_limit_change
+  - international_usage
+  - card_expiry_renewal
+  - card_declined_reason
+
+  # 🔹 Deposits & Loans
+  - open_fd #M
+  - close_fd #M
+  - fd_interest_rate
+  - apply_loan #M
+  - provide_loan_type #M
+  - loan_eligibility
+  - loan_interest_rate
+  - loan_repayment
+  - emi_due_date
+  - loan_statement
+  - loan_default_penalty
+
+  # 🔹 Digital & Online Banking
+  - register_netbanking #M
+  - register_mobilebanking #M
+  - reset_password #M 
+  - two_factor_auth
+  - upi_registration
+  - upi_limit
+  - upi_failed_transaction
+  - security_settings
+  - update_mpin #M
+  - email_alerts
+
+  # 🔹 Statements & Certificates
+  - download_statement
+  - interest_certificate
+  - tds_details
+  - check_passbook_status
+  - duplicate_statement_request #M
+
+  # 🔹 Security & Support
+  - report_fraud #M
+  - phishing_alert
+  - account_lock
+  - privacy_policy
+  - customer_support_contact
+
+  # 🔹 Education & Awareness
+  - difference_savings_current
+  - ifsc_meaning
+  - swift_code_info
+  - neft_vs_imps_vs_rtgs
+  - nominee_importance
+  - cibil_score
+  - rbi_guidelines
+  - inactive_account_fees
+  - cash_deposit_limit
+  - daily_withdrawal_limit
+
+  # 🔹 Offers & Promotions
+  - credit_card_offers
+  - loan_offers
+  - rewards_points #M
+  - festive_offers
+  - refer_friend #M
+
+  # 🔹 Feedback & Miscellaneous
+  - update_kyc #M
+  - branch_locator
+  - working_hours
+  - holiday_list
+  - feedback_complaint #M
+  - foreign_exchange
+  - cheque_status
+  - stop_cheque_payment #M
+  - cheque_book_request
+  - locker_facility
+
+  # 🔹 Small Talk / Common
   - greet
   - goodbye
   - affirm
   - deny
-  - open_account
-  - provide_name
-  - provide_account_type
-  - provide_deposit
-  - check_balance
-  - provide_account_number
-  - transfer_money
-  - provide_receiver_name
-  - provide_amount
-  - apply_loan
-  - pay_bill
-  - apply_card
-  - provide_card_type
   - help
-  - contact_support
-  - feedback
   - out_of_scope
-  - show_recent_transactions
+  - nlu_fallback
+  - provide_name
+  - provide_balance
+  - provide_phone
+  - update_phone_number
+  - provide_email
+  - provide_otp
+  
 
 entities:
   - name
+  - balance
+  - phone
+  - email
   - account_type
-  - deposit_amount
-  - account_number
-  - receiver_name
-  - amount
-  - loan_type
-  - bill_type
-  - bill_amount
-  - card_type
+  - otp
 
 slots:
   name:
@@ -48,87 +144,336 @@ slots:
     mappings:
       - type: from_entity
         entity: account_type
+      - type: from_intent
+        intent: provide_account_type
+        value: "{text}"
+      
 
-  deposit_amount:
+  balance:
     type: text
     mappings:
       - type: from_entity
-        entity: deposit_amount
+        entity: balance
+      - type: from_intent
+        intent: provide_balance
+        value: "{text}"
+
+  phone:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: phone
+        intent: provide_phone
+        not_intent: provide_new_phone
+
+  email:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: email
+      # - type: from_intent
+      #   intent: provide_new_email
+      #   value: "{email}"
+
+  otp:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        intent: provide_otp
 
   # account_number:
   #   type: text
   #   mappings:
+  #     - type: from_text
+  #       conditions:
+  #         - active_loop: balance_form
+  #           requested_slot: account_number
   #     - type: from_entity
   #       entity: account_number
-      
-  account_number:
-    type: text
-    mappings:
-      - type: from_text
-        conditions:
-          - active_loop: balance_form
-            requested_slot: account_number
-      - type: from_entity
-        entity: account_number
-        conditions:
-          - active_loop: balance_form
-            requested_slot: account_number
-      - type: from_entity
-        entity: account_number
+  #       conditions:
+  #         - active_loop: balance_form
+  #           requested_slot: account_number
+  #     - type: from_entity
+  #       entity: account_number
 
-  receiver_name:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: receiver_name
+  # loan_type:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #     - type: from_entity
+  #       entity: loan_type
 
-  amount:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: amount
-
-  loan_type:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: loan_type
-
-  bill_type:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: bill_type
-
-  bill_amount:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: bill_amount
-
-  card_type:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: card_type
-        conditions:
-          - active_loop: card_application_form
-            requested_slot: card_type
-      - type: from_entity
-        entity: card_type
+  # card_type:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #     - type: from_entity
+  #       entity: card_type
+  #       conditions:
+  #         - active_loop: card_application_form
+  #           requested_slot: card_type
+  #     - type: from_entity
+  #       entity: card_type
 
 responses:
+
+# Single Turn Convos
+  
+  utter_account_status:
+    - text: "To check your account status, please log in to your net banking or mobile banking app. You can also visit your nearest branch to confirm whether your account is active, frozen, or dormant."
+
+  utter_close_account:
+    - text: "To close your account, please visit your home branch with your ID proof, passbook, and cheque book. Some accounts can also be closed via a written request submitted online through the bank portal."
+
+  utter_dormant_account_reactivation:
+    - text: "If your account has become dormant due to inactivity, you can reactivate it by visiting your branch with valid ID proof and performing a small transaction like a deposit or withdrawal."
+
+  utter_nominee_details:
+    - text: "You can add, view, or update your nominee details through internet banking or by submitting a nomination form (DA1) at your home branch."
+
+  utter_joint_account_info:
+    - text: "A joint account allows two or more individuals to share account ownership. You can open one by visiting the branch with all account holders’ KYC documents and photos."
+
+  utter_transaction_history:
+    - text: "You can check your complete transaction history using your bank’s mobile or net banking portal. Go to the 'Transaction History' or 'Account Statement' section to view and download past transactions."
+
+  utter_transaction_status:
+    - text: "You can verify your transaction status through the 'Transaction History' section of your mobile banking app. For failed or pending transactions, please wait a few minutes or contact customer care with the transaction ID."
+
+  utter_fund_transfer:
+    - text: "To transfer funds, you can use NEFT, IMPS, or RTGS through net banking, mobile banking, or UPI. Make sure you have the recipient’s account number, IFSC code, and name before confirming the transfer."
+
+  utter_transfer_limit:
+    - text: "The daily transfer limit depends on your account type and transfer mode. IMPS usually allows up to ₹2 lakh per day, while NEFT/RTGS limits can be higher. You can check or modify your limit in your net banking settings."
+
+  utter_wrong_transfer:
+    - text: "If you transferred money to the wrong account, immediately contact your bank’s branch or customer support. Provide the transaction ID and details. The reversal process depends on the recipient’s bank’s approval."
+
+  utter_reversal_time:
+    - text: "Refunds for failed transactions typically take between 3 to 7 working days, depending on the payment mode. If it takes longer, please share the transaction reference ID with customer care."
+
+  utter_bank_charges:
+    - text: "Bank service charges vary by transaction type. NEFT/IMPS/RTGS transfers may have small fees, while UPI is usually free. You can view the detailed charge list on the bank’s website or through customer care."
+
+  utter_auto_debit_enquiry:
+    - text: "Auto-debit lets your bills or EMIs be paid automatically from your account. You can activate or cancel auto-debit instructions from your bank’s app, website, or by submitting a request at your branch."
+
+  utter_apply_debit_card:
+    - text: "You can apply for a new debit card through your mobile banking app, net banking, or by visiting your home branch. Once applied, your card will be delivered to your registered address within 7–10 working days."
+
+  utter_apply_credit_card:
+    - text: "To apply for a credit card, please visit our website or your nearest branch. You’ll need your PAN card, income proof, and valid ID proof for eligibility verification."
+
+  utter_card_delivery_status:
+    - text: "You can track your card delivery status from your mobile banking app under 'Card Services' or contact customer care with your registered mobile number for assistance."
+
+  utter_block_card:
+    - text: "For your safety, card blocking cannot be processed through chat. Please call the bank’s 24x7 helpline or use your mobile banking app to immediately block your card."
+
+  utter_unblock_card:
+    - text: "To unblock your card, please visit the branch or use your mobile banking app after verifying your identity. This ensures your account remains secure."
+
+  utter_set_pin:
+    - text: "You can set or reset your card PIN through the bank’s ATM, mobile banking app, or net banking. For your safety, avoid sharing your PIN with anyone."
+
+  utter_card_limit_change:
+    - text: "To change your card’s spending or withdrawal limit, log in to your mobile banking app or net banking portal. You can view, increase, or decrease your limit instantly."
+
+  utter_international_usage:
+    - text: "International transactions can be enabled or disabled from your mobile banking or net banking under 'Card Controls'. Make sure your card supports international payments before traveling."
+
+  utter_card_expiry_renewal:
+    - text: "Cards are automatically renewed before expiry and sent to your registered address. If not received, contact customer care or visit your branch to request a new card."
+
+  utter_card_declined_reason:
+    - text: "A card transaction may be declined due to insufficient balance, wrong PIN, expired card, or security restrictions. Please check your card’s validity and ensure it’s active for the selected payment mode."
+
+  utter_open_fd:
+    - text: "To open a Fixed Deposit (FD), log in to your net banking or mobile banking app and go to 'Deposit Services'. You can select the deposit amount, tenure, and payout frequency online or visit your branch for assistance."
+
+  utter_close_fd:
+    - text: "You can close your FD before or after maturity using your mobile banking or by visiting your branch. Premature closure may attract a small penalty on interest earned."
+
+  utter_fd_interest_rate:
+    - text: "Our current FD interest rates range between 6.5% to 7.5% per annum depending on the tenure and amount. For senior citizens, an additional 0.5% interest is applicable."
+
+  utter_apply_loan:
+    - text: "You can apply for personal, home, or vehicle loans through our website or mobile banking app. The process includes filling in basic details and uploading necessary documents for verification."
+
+  utter_provide_loan_type:
+    - text: "We offer multiple loan types such as Personal Loan, Home Loan, Education Loan, Vehicle Loan, and Business Loan. You can choose one as per your need."
+
+  utter_loan_eligibility:
+    - text: "Loan eligibility depends on your income, credit score, employment type, and repayment history. You can check your eligibility instantly through our online loan eligibility calculator."
+
+  utter_loan_interest_rate:
+    - text: "Our current loan interest rates vary by loan type: Personal Loan - 10.5%, Home Loan - 8.4%, and Vehicle Loan - 9.0% per annum. Please check the official rate chart for the latest offers."
+
+  utter_loan_repayment:
+    - text: "Loan repayment can be done via auto-debit, standing instruction, or manual payment through net banking. You can also prepay or foreclose your loan after a certain period."
+
+  utter_emi_due_date:
+    - text: "You can view your EMI due date in the loan section of your mobile banking app or check your monthly e-statement. Please ensure sufficient balance one day before the due date."
+
+  utter_loan_statement:
+    - text: "You can download your detailed loan statement from your net banking dashboard under 'Loan Accounts'. You may also request a soft copy by emailing customer care."
+
+  utter_loan_default_penalty:
+    - text: "If you miss an EMI payment, a late payment fee and additional interest may be charged. Repeated defaults can affect your credit score and may lead to legal action."
+
+  utter_register_netbanking:
+    - text: "To register for net banking, visit our official website and click on 'New User Registration'. Enter your account number, registered mobile number, and follow the OTP verification process to set your login password."
+
+  utter_register_mobilebanking:
+    - text: "To activate mobile banking, download our official mobile app from the Play Store or App Store. Open the app, select 'New Registration', and complete verification using your registered mobile number and debit card details."
+
+  utter_reset_password:
+    - text: "If you’ve forgotten your login password, go to the net banking login page and click 'Forgot Password'. Enter your account details and verify using OTP to reset your password securely."
+
+  utter_two_factor_auth:
+    - text: "Two-factor authentication adds an extra layer of security to your account. It requires both your password and an OTP or biometric confirmation to complete transactions."
+
+  utter_upi_registration:
+    - text: "You can register for UPI using any UPI-enabled mobile app like Google Pay, PhonePe, or our bank’s app. Link your account, create a UPI ID, and set your 4 or 6-digit UPI PIN."
+
+  utter_upi_limit:
+    - text: "The daily UPI transaction limit is ₹1 lakh, though some banks may restrict it further. Also, only up to 10 UPI transfers are allowed within 24 hours for security reasons."
+
+  utter_upi_failed_transaction:
+    - text: "If your UPI payment failed but money was debited, don’t worry—it will be reversed automatically within 3 working days. You can check the refund status in your UPI app’s transaction history."
+
+  utter_security_settings:
+    - text: "Always keep your banking passwords private, avoid using public Wi-Fi, and regularly update your PINs. Enable app locks and SMS/email alerts to monitor account activity."
+
+  utter_update_mpin:
+    - text: "To change or update your MPIN, open your mobile banking or UPI app, go to 'Settings' → 'Change MPIN', and follow the instructions. Never share your MPIN with anyone."
+
+  utter_email_alerts:
+    - text: "You can enable or disable email alerts through your net banking or mobile app settings. Email alerts help you stay updated on every debit, credit, and account activity."
+
+  utter_download_statement:
+    - text: "To download your account statement, log in to your net banking or mobile banking app. Go to the 'Account Statement' section, select the desired period, and click on 'Download PDF'. For older statements, please contact customer support."
+
+  utter_interest_certificate:
+    - text: "You can download your Interest Certificate for the financial year through your net banking account under 'Tax Services' or 'Certificates'. It shows the total interest earned on deposits during the year."
+
+  utter_tds_details:
+    - text: "Your TDS (Tax Deducted at Source) details are available in your net banking under the 'Tax Services' or 'Form 26AS' section. You can also view them on the Income Tax portal using your PAN."
+
+  utter_check_passbook_status:
+    - text: "You can check the printing or issuance status of your passbook by visiting your home branch or contacting customer care. Digital passbooks are also available in the mobile app for instant viewing."
+
+  utter_duplicate_statement_request:
+    - text: "To request a duplicate account statement, please visit your branch or send an email from your registered ID. You can also generate one online under 'e-Statements' if available for your account."
+
+  utter_report_fraud:
+    - text: "If you suspect any unauthorized transaction or fraudulent activity, please contact our 24x7 Fraud Helpline immediately at 1800-123-4567 or email fraudreport@smartbank.com. You can also block your card or account via the mobile banking app for safety."
+
+  utter_phishing_alert:
+    - text: "Beware of phishing messages or emails asking for your PIN, password, or OTP. Our bank never asks for these details. If you receive any suspicious message or link, forward it to phishingalert@smartbank.com."
+
+  utter_account_lock:
+    - text: "If your account or login has been locked due to multiple incorrect password attempts, please reset your password through net banking or contact customer care to unlock it securely."
+
+  utter_privacy_policy:
+    - text: "We value your privacy. Your data is stored and processed in compliance with RBI and IT Act guidelines. You can read our full privacy policy at https://smartbank.com/privacy-policy."
+
+  utter_customer_support_contact:
+    - text: "You can reach our customer support 24x7 at 1800-123-0000 or email support@smartbank.com. You can also chat with a live agent for urgent issues during business hours."
+
+  utter_difference_savings_current:
+    - text: "A Savings Account is meant for personal use and helps you save money while earning interest. A Current Account is mainly for businesses and allows higher transaction limits but usually doesn't earn interest."
+
+  utter_ifsc_meaning:
+    - text: "IFSC stands for Indian Financial System Code. It’s an 11-character code that uniquely identifies every bank branch in India and is required for NEFT, RTGS, and IMPS transactions."
+
+  utter_swift_code_info:
+    - text: "A SWIFT code (also known as BIC) is used for international money transfers. It identifies your bank globally and consists of 8 to 11 alphanumeric characters. Example: SBININBBXXX for SBI India."
+
+  utter_neft_vs_imps_vs_rtgs:
+    - text: "Here’s the difference:\n\n• NEFT – Transfers in hourly batches, available 24x7.\n• IMPS – Instant fund transfer (limit ₹2 lakh/day).\n• RTGS – For large-value transactions (₹2 lakh+), real-time settlement.\n\nAll modes are secure and RBI-regulated."
+
+  utter_nominee_importance:
+    - text: "A nominee ensures your funds are safely transferred to your chosen person in case of unforeseen events. You can register or update a nominee anytime through internet banking or by submitting a form at your branch."
+
+  utter_cibil_score:
+    - text: "A CIBIL score is a 3-digit number (300–900) that represents your creditworthiness. A score above 750 is considered good. You can check it for free on CIBIL’s official website or through our bank app."
+
+  utter_rbi_guidelines:
+    - text: "All banks in India operate under the supervision of the Reserve Bank of India (RBI). RBI issues policies on interest rates, KYC, fraud protection, and digital payments to ensure transparency and safety for customers."
+
+  utter_inactive_account_fees:
+    - text: "If your account remains inactive for more than 2 years, it may be marked dormant. Some banks may charge a small reactivation or maintenance fee. You can avoid this by doing at least one transaction every few months."
+
+  utter_cash_deposit_limit:
+    - text: "Cash deposit limits vary by account type. Savings Accounts usually allow ₹1–2 lakh per day without PAN, while Current Accounts have higher limits. Deposits above ₹2 lakh may require PAN and source declaration."
+
+  utter_daily_withdrawal_limit:
+    - text: "ATM withdrawal limits depend on your card type. For most debit cards, the daily limit is between ₹25,000 and ₹50,000. You can check or modify your limit in your mobile banking app."
+
+  utter_credit_card_offers:
+    - text: "We’re currently offering exciting credit card deals! Enjoy cashback up to 5%, travel rewards, and fuel surcharge waivers. Apply via net banking or visit your nearest branch to know which card suits you best."
+
+  utter_loan_offers:
+    - text: "Special limited-period loan offers are live! Get personal loans starting at 10.25% p.a., and home loans at 8.45% p.a. Apply online or visit your branch to check your eligibility."
+
+  utter_rewards_points:
+    - text: "Earn and redeem reward points on every credit or debit card transaction. You can view your total points and redeem them for vouchers, discounts, or air miles through the Rewards section in your mobile app."
+
+  utter_festive_offers:
+    - text: "Celebrate the festive season with exclusive offers! Get zero processing fees on home and car loans, and 10% cashback on select credit cards. Offers valid till 31st December—apply today!"
+
+  utter_refer_friend:
+    - text: "Refer your friends to open an account and earn ₹500 cashback when they complete their first transaction. Share your referral code from the mobile banking app’s 'Refer & Earn' section."
+
+  utter_update_kyc:
+    - text: "To update your KYC, please visit your nearest branch with valid ID proof and address proof such as Aadhaar or PAN card. Some updates can also be done online through the net banking portal under 'Profile Settings'."
+
+  utter_branch_locator:
+    - text: "You can find your nearest branch or ATM using our Branch Locator tool on the website or mobile app. Simply enter your city or PIN code to view nearby branches, timings, and services available."
+
+  utter_working_hours:
+    - text: "Our regular branch working hours are Monday to Friday, 10:00 AM to 4:00 PM, and Saturday (1st, 3rd, 5th) from 10:00 AM to 2:00 PM. Branches remain closed on Sundays and public holidays."
+
+  utter_holiday_list:
+    - text: "You can view the list of bank holidays on our website under the 'Holiday Calendar' section. Major holidays include Republic Day, Independence Day, Diwali, and Christmas."
+
+  utter_feedback_complaint:
+    - text: "We’re sorry if you faced any issue. You can share your feedback or complaint via email at care@smartbank.com or fill out the Feedback Form in your net banking dashboard. We aim to resolve queries within 3 working days."
+
+  utter_foreign_exchange:
+    - text: "We offer foreign exchange services for major global currencies. You can visit select branches or our Forex partners for currency exchange, wire transfers, or travel cards. Please carry valid ID and PAN."
+
+  utter_cheque_status:
+    - text: "You can check your cheque status in the 'Cheque Services' section of your mobile banking or net banking app. Alternatively, contact customer care with your cheque number for detailed information."
+
+  utter_stop_cheque_payment:
+    - text: "For security reasons, cheque stop payment requests cannot be processed through chat. Please use your net banking or call customer care to place a stop request by providing cheque number and account details."
+
+  utter_cheque_book_request:
+    - text: "To request a new cheque book, log in to your net banking or mobile banking app and go to 'Cheque Services'. You can also submit a request form at your home branch."
+
+  utter_locker_facility:
+    - text: "Our bank offers locker facilities at select branches. Locker sizes and rental charges vary by location. You can apply for one by visiting your branch with valid ID proof and account details."
+
   utter_greet:
   - text: "Hello! 👋 I’m your Bank Assistant. How may I help you today?"
 
   utter_goodbye:
   - text: "Bye"
+  
+  utter_affirm:
+    - text: "Great! Let's continue."
+
+  utter_deny:
+    - text: "No problem, I’ve cancelled the request."
+
+  utter_help:
+    - text: "I can help you with checking balance, transferring money, paying bills, loans, card services, and transactions."
+
+  utter_out_of_scope:
+    - text: "Sorry, I can only help with banking-related queries."
 
   utter_ask_rephrase:
     - text: "I'm sorry, I didn't understand. Can you rephrase?"
@@ -136,96 +481,106 @@ responses:
   utter_ask_name:
     - text: "Sure! May I have your full name?"
 
-  utter_ask_account_type:
-    - text: "Thanks {name}. Which type of account would you like(Savings/Current)"
-
-  utter_ask_deposit_amount:
+  utter_ask_balance:
     - text: "Great choice! How much would you like to deposit initially?"
 
-  utter_account_opened:
-    - text: "Thank you {name}! Your {account_type} account has been opened with an initial deposit of {deposit_amount}."
+  utter_ask_phone:
+    - text: "Please share your mobile number." 
+  
+  utter_ask_email:
+    - text: "Provide your email address." 
 
-  utter_ask_account_number:
-    - text: "Please provide account number."
+  utter_ask_account_type:
+    - text: "Thanks . Which type of account would you like(Savings/Current/Salary)"
 
-  utter_show_balance:
-    - text: "Your balance for account {account_number} is ₹15,000."
+  utter_ask_account_type_min_balance:
+    - text: "Sure! For which account type — Savings, Current, or Salary?"
 
-  utter_ask_receiver_name:
-    - text: "Sure! Please tell me the receiver name."
+  utter_min_balance:
+    - text: "The minimum balance for {account_type} account is ₹{amount}."
 
-  utter_ask_amount:
-    - text: "How much money would you like to transfer?"
+  utter_ask_otp:
+    - text: "Enter the 6-digit OTP sent to your email."
 
-  utter_transfer_success:
-    - text: "₹{amount} has been successfully transferred from your account to  {receiver_name}."
+  utter_update:
+    - text: " For updating your personal details you have to visit your branch or you can also do it through net banking!"
 
-  utter_ask_loan_type:
-    - text: "Which type of loan are you applying for? (Personal/Home/Car/Education)"
+  utter_ask_email_for_recovery:
+    - text: "Sure, I can help you recover your account number. Please enter your registered email address."
 
-  utter_submit_loan_application:
-    - text: "Thank you! Your loan application has been submitted successfully."
+  utter_account_number_recovered:
+    - text: "✅ Your account number is: {account_number}\nPlease save it safely."
 
-  utter_ask_bill_type:
-    - text: "Sure! Which type of bill do you want to pay? (Electricity/Broadband/Gas)"
+  utter_ask_email_balance:
+    - text: "Please enter your registered email to check your balance."
 
-  utter_ask_bill_amount:
-    - text: "Please tell me the amount to pay."
+  utter_balance_success:
+    - text: "✅ Your current account balance is: ₹{balance}"
 
-  utter_bill_paid:
-    - text: "✅ Your {bill_type} bill of ₹{bill_amount} has been paid successfully!"  
+  # utter_show_balance:
+  #   - text: "Your balance for account {account_number} is ₹15,000."
 
-  utter_ask_card_type:
-    - text: "Sure! Do you want to apply for a Credit Card or Debit Card?"
+  # utter_ask_loan_type:
+  #   - text: "Which type of loan are you applying for? (Personal/Home/Car/Education)"
 
-  utter_submit_card_application:
-    - text: "Great! Your {card_type} application has been submitted successfully for your {account_type} account!"
+  # utter_submit_loan_application:
+  #   - text: "Thank you! Your loan application has been submitted successfully."
 
-  utter_help:
-    - text: "I can help you with checking balance, transferring money, paying bills, loans, card services, and transactions."
-  utter_contact_support:
-    - text: "You can reach customer support at 1800-123-4567 or email support@bank.com."
-  utter_feedback:
-    - text: "Thanks for your feedback! 😊"
-  utter_out_of_scope:
-    - text: "Sorry, I can only help with banking-related queries."
+  # utter_ask_card_type:
+  #   - text: "Sure! Do you want to apply for a Credit Card or Debit Card?"
+
+  # utter_submit_card_application:
+  #   - text: "Great! Your {card_type} application has been submitted successfully for your {account_type} account!"
+
   utter_default:
     - text: "I'm sorry, I didn’t quite understand that. 🤔 Can you rephrase?"  
+
 forms:
   open_account_form:
     required_slots:
       - name
+      - balance
+      - phone
+      - email
       - account_type
-      - deposit_amount
 
-  balance_form:
+  minimum_balance_form:
     required_slots:
       - account_type
-      - account_number
 
-  transfer_money_form:
-    required_slots:
-      - receiver_name
-      - amount
+  # balance_form:
+  #   required_slots:
+  #     - account_type
+  #     - account_number
 
-  loan_application_form:
-    required_slots:
-      - name
-      - loan_type
+  # transfer_money_form:
+  #   required_slots:
+  #     - receiver_name
+  #     - amount
 
-  pay_bill_form:
-    required_slots:
-      - bill_type
-      - bill_amount
+  # loan_application_form:
+  #   required_slots:
+  #     - name
+  #     - loan_type
+
+  # pay_bill_form:
+  #   required_slots:
+  #     - bill_type
+  #     - bill_amount
   
-  card_application_form:
-    required_slots:
-      - card_type
-      - name
-      - account_type
+  # card_application_form:
+  #   required_slots:
+  #     - card_type
+  #     - name
+  #     - account_type
 
 actions:
-  - action_show_recent_transactions
+  - action_submit_account
+  - action_minimum_balance
+  - action_send_otp_email
+  - action_validate_otp
+  - action_recover_account_number
+  - action_check_balance
 
 session_config:
   session_expiration_time: 60

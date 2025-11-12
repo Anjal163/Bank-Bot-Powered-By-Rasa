@@ -12,126 +12,545 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
 
-- rule: Open account form
+- rule: Account status enquiry
   steps:
-    - intent: open_account
-    - action: open_account_form
-    - active_loop: open_account_form
+  - intent: account_status
+  - action: utter_account_status
+
+- rule: Close account request
+  steps:
+  - intent: close_account
+  - action: utter_close_account
+
+- rule: Dormant account reactivation
+  steps:
+  - intent: dormant_account_reactivation
+  - action: utter_dormant_account_reactivation
+
+- rule: Nominee details info
+  steps:
+  - intent: nominee_details
+  - action: utter_nominee_details
+
+- rule: Joint account information
+  steps:
+  - intent: joint_account_info
+  - action: utter_joint_account_info
+
+- rule: Transaction history enquiry
+  steps:
+  - intent: transaction_history
+  - action: utter_transaction_history
+
+- rule: Transaction status enquiry
+  steps:
+  - intent: transaction_status
+  - action: utter_transaction_status
+
+- rule: Fund transfer information
+  steps:
+  - intent: fund_transfer
+  - action: utter_fund_transfer
+
+- rule: Transfer limit enquiry
+  steps:
+  - intent: transfer_limit
+  - action: utter_transfer_limit
+
+- rule: Wrong transfer support
+  steps:
+  - intent: wrong_transfer
+  - action: utter_wrong_transfer
+
+- rule: Reversal time information
+  steps:
+  - intent: reversal_time
+  - action: utter_reversal_time
+
+- rule: Bank charges information
+  steps:
+  - intent: bank_charges
+  - action: utter_bank_charges
+
+- rule: Auto-debit enquiry
+  steps:
+  - intent: auto_debit_enquiry
+  - action: utter_auto_debit_enquiry
+
+- rule: Apply debit card info
+  steps:
+  - intent: apply_debit_card
+  - action: utter_apply_debit_card
+
+- rule: Apply credit card info
+  steps:
+  - intent: apply_credit_card
+  - action: utter_apply_credit_card
+
+- rule: Card delivery status info
+  steps:
+  - intent: card_delivery_status
+  - action: utter_card_delivery_status
+
+- rule: Block card info
+  steps:
+  - intent: block_card
+  - action: utter_block_card
+
+- rule: Unblock card info
+  steps:
+  - intent: unblock_card
+  - action: utter_unblock_card
+
+- rule: Set or reset PIN info
+  steps:
+  - intent: set_pin
+  - action: utter_set_pin
+
+- rule: Card limit change info
+  steps:
+  - intent: card_limit_change
+  - action: utter_card_limit_change
+
+- rule: International usage info
+  steps:
+  - intent: international_usage
+  - action: utter_international_usage
+
+- rule: Card expiry renewal info
+  steps:
+  - intent: card_expiry_renewal
+  - action: utter_card_expiry_renewal
+
+- rule: Card declined reason info
+  steps:
+  - intent: card_declined_reason
+  - action: utter_card_declined_reason
+
+- rule: Open FD info
+  steps:
+  - intent: open_fd
+  - action: utter_open_fd
+
+- rule: Close FD info
+  steps:
+  - intent: close_fd
+  - action: utter_close_fd
+
+- rule: FD interest rate info
+  steps:
+  - intent: fd_interest_rate
+  - action: utter_fd_interest_rate
+
+- rule: Apply loan info
+  steps:
+  - intent: apply_loan
+  - action: utter_apply_loan
+
+- rule: Provide loan types
+  steps:
+  - intent: provide_loan_type
+  - action: utter_provide_loan_type
+
+- rule: Loan eligibility info
+  steps:
+  - intent: loan_eligibility
+  - action: utter_loan_eligibility
+
+- rule: Loan interest rate info
+  steps:
+  - intent: loan_interest_rate
+  - action: utter_loan_interest_rate
+
+- rule: Loan repayment info
+  steps:
+  - intent: loan_repayment
+  - action: utter_loan_repayment
+
+- rule: EMI due date info
+  steps:
+  - intent: emi_due_date
+  - action: utter_emi_due_date
+
+- rule: Loan statement info
+  steps:
+  - intent: loan_statement
+  - action: utter_loan_statement
+
+- rule: Loan default penalty info
+  steps:
+  - intent: loan_default_penalty
+  - action: utter_loan_default_penalty
+
+- rule: Register net banking info
+  steps:
+  - intent: register_netbanking
+  - action: utter_register_netbanking
+
+- rule: Register mobile banking info
+  steps:
+  - intent: register_mobilebanking
+  - action: utter_register_mobilebanking
+
+- rule: Reset password info
+  steps:
+  - intent: reset_password
+  - action: utter_reset_password
+
+- rule: Two-factor authentication info
+  steps:
+  - intent: two_factor_auth
+  - action: utter_two_factor_auth
+
+- rule: UPI registration info
+  steps:
+  - intent: upi_registration
+  - action: utter_upi_registration
+
+- rule: UPI limit info
+  steps:
+  - intent: upi_limit
+  - action: utter_upi_limit
+
+- rule: UPI failed transaction info
+  steps:
+  - intent: upi_failed_transaction
+  - action: utter_upi_failed_transaction
+
+- rule: Security settings info
+  steps:
+  - intent: security_settings
+  - action: utter_security_settings
+
+- rule: Update MPIN info
+  steps:
+  - intent: update_mpin
+  - action: utter_update_mpin
+
+- rule: Email alerts info
+  steps:
+  - intent: email_alerts
+  - action: utter_email_alerts
+
+- rule: Download statement info
+  steps:
+  - intent: download_statement
+  - action: utter_download_statement
+
+- rule: Interest certificate info
+  steps:
+  - intent: interest_certificate
+  - action: utter_interest_certificate
+
+- rule: TDS details info
+  steps:
+  - intent: tds_details
+  - action: utter_tds_details
+
+- rule: Check passbook status info
+  steps:
+  - intent: check_passbook_status
+  - action: utter_check_passbook_status
+
+- rule: Duplicate statement request info
+  steps:
+  - intent: duplicate_statement_request
+  - action: utter_duplicate_statement_request
+
+- rule: Report fraud info
+  steps:
+  - intent: report_fraud
+  - action: utter_report_fraud
+
+- rule: Phishing alert info
+  steps:
+  - intent: phishing_alert
+  - action: utter_phishing_alert
+
+- rule: Account lock info
+  steps:
+  - intent: account_lock
+  - action: utter_account_lock
+
+- rule: Privacy policy info
+  steps:
+  - intent: privacy_policy
+  - action: utter_privacy_policy
+
+- rule: Customer support contact info
+  steps:
+  - intent: customer_support_contact
+  - action: utter_customer_support_contact
+
+- rule: Difference between savings and current account
+  steps:
+  - intent: difference_savings_current
+  - action: utter_difference_savings_current
+
+- rule: IFSC meaning info
+  steps:
+  - intent: ifsc_meaning
+  - action: utter_ifsc_meaning
+
+- rule: SWIFT code info
+  steps:
+  - intent: swift_code_info
+  - action: utter_swift_code_info
+
+- rule: NEFT vs IMPS vs RTGS info
+  steps:
+  - intent: neft_vs_imps_vs_rtgs
+  - action: utter_neft_vs_imps_vs_rtgs
+
+- rule: Nominee importance info
+  steps:
+  - intent: nominee_importance
+  - action: utter_nominee_importance
+
+- rule: CIBIL score info
+  steps:
+  - intent: cibil_score
+  - action: utter_cibil_score
+
+- rule: RBI guidelines info
+  steps:
+  - intent: rbi_guidelines
+  - action: utter_rbi_guidelines
+
+- rule: Inactive account fees info
+  steps:
+  - intent: inactive_account_fees
+  - action: utter_inactive_account_fees
+
+- rule: Cash deposit limit info
+  steps:
+  - intent: cash_deposit_limit
+  - action: utter_cash_deposit_limit
+
+- rule: Daily withdrawal limit info
+  steps:
+  - intent: daily_withdrawal_limit
+  - action: utter_daily_withdrawal_limit
+
+- rule: Credit card offers info
+  steps:
+  - intent: credit_card_offers
+  - action: utter_credit_card_offers
+
+- rule: Loan offers info
+  steps:
+  - intent: loan_offers
+  - action: utter_loan_offers
+
+- rule: Rewards points info
+  steps:
+  - intent: rewards_points
+  - action: utter_rewards_points
+
+- rule: Festive offers info
+  steps:
+  - intent: festive_offers
+  - action: utter_festive_offers
+
+- rule: Refer friend info
+  steps:
+  - intent: refer_friend
+  - action: utter_refer_friend
+
+- rule: Update KYC info
+  steps:
+  - intent: update_kyc
+  - action: utter_update_kyc
+
+- rule: Branch locator info
+  steps:
+  - intent: branch_locator
+  - action: utter_branch_locator
+
+- rule: Working hours info
+  steps:
+  - intent: working_hours
+  - action: utter_working_hours
+
+- rule: Holiday list info
+  steps:
+  - intent: holiday_list
+  - action: utter_holiday_list
+
+- rule: Feedback or complaint info
+  steps:
+  - intent: feedback_complaint
+  - action: utter_feedback_complaint
+
+- rule: Foreign exchange info
+  steps:
+  - intent: foreign_exchange
+  - action: utter_foreign_exchange
+
+- rule: Cheque status info
+  steps:
+  - intent: cheque_status
+  - action: utter_cheque_status
+
+- rule: Stop cheque payment info
+  steps:
+  - intent: stop_cheque_payment
+  - action: utter_stop_cheque_payment
+
+- rule: Cheque book request info
+  steps:
+  - intent: cheque_book_request
+  - action: utter_cheque_book_request
+
+- rule: Locker facility info
+  steps:
+  - intent: locker_facility
+  - action: utter_locker_facility
+
+- rule: Greet user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Say goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: User says yes
+  steps:
+  - intent: affirm
+  - action: utter_affirm
+
+- rule: User says no
+  steps:
+  - intent: deny
+  - action: utter_deny
+
+- rule: Help user
+  steps:
+  - intent: help
+  - action: utter_help
+
+- rule: Out of scope message
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- rule: Ask rephrase when message not understood
+  steps:
+  - intent: nlu_fallback
+  - action: utter_ask_rephrase
+
+- rule: Activate open account form
+  steps:
+  - intent: open_account
+  - action: open_account_form
+  - active_loop: open_account_form
 
 - rule: Submit open account form
   condition:
-    - active_loop: open_account_form
+  - active_loop: open_account_form
   steps:
-    - action: open_account_form
-    - active_loop: null
-    - action: utter_account_opened
+  - action: open_account_form
+  - active_loop: null
+  - action: action_submit_account
 
-- rule: Start balance form
+- rule: Ask account type to give minimum balance
+  steps:
+    - intent: minimum_balance
+    - action: minimum_balance_form
+    - active_loop: minimum_balance_form
+
+- rule: Submit minimum balance form
+  condition:
+    - active_loop: minimum_balance_form
+  steps:
+    - action: minimum_balance_form
+    - active_loop: null
+    - action: action_minimum_balance
+
+- rule: Ask email for account recovery
+  steps:
+    - intent: account_number_lost
+    - action: utter_ask_email_for_recovery
+
+- rule: Send OTP for account recovery
+  steps:
+    - intent: provide_email
+    - action: action_send_otp_email
+    - action: utter_ask_otp
+
+- rule: Recover account after OTP verified
+  steps:
+    - intent: provide_otp
+    - action: action_validate_otp
+    - action: action_recover_account_number
+    - action: utter_account_number_recovered
+
+- rule: Ask email for balance check
   steps:
     - intent: check_balance
-    - action: balance_form
-    - active_loop: balance_form
+    - action: utter_ask_email_balance
 
-- rule: Submit balance form
-  condition:
-    - active_loop: balance_form
+- rule: Send OTP for balance check
   steps:
-    - action: balance_form
-    - active_loop: null
-    - action: utter_show_balance
+    - intent: provide_email
+    - action: action_send_otp_email
+    - action: utter_ask_otp
 
-- rule: Activate transfer money form
+- rule: Show balance after OTP verified
   steps:
-  - intent: transfer_money
-  - action: transfer_money_form
-  - active_loop: transfer_money_form
-  wait_for_user_input: false
+    - action: action_validate_otp
+    - action: action_check_balance
+    - action: utter_balance_success
 
 
-- rule: Submit transfer money form
-  condition:
-  - active_loop: transfer_money_form
+
+- rule: Update personal details
   steps:
-  - action: transfer_money_form
-  - active_loop: null
-  - slot_was_set:
-          - receiver_name: true
-          - amount: true
-  - action: utter_transfer_success
+    - intent: update_personal_details
+    - action: utter_update
 
-- rule: Activate loan application form
-  steps:
-      - intent: apply_loan
-      - action: loan_application_form
-      - active_loop: loan_application_form
+# - rule: Start balance form
+#   steps:
+#     - intent: check_balance
+#     - action: balance_form
+#     - active_loop: balance_form
 
-- rule: Submit loan application form
-  condition:
-  - active_loop: loan_application_form
-  steps:
-      - action: loan_application_form
-      - active_loop: null
-      - action: utter_submit_loan_application
+# - rule: Submit balance form
+#   condition:
+#     - active_loop: balance_form
+#   steps:
+#     - action: balance_form
+#     - active_loop: null
+#     - action: utter_show_balance
 
-- rule: Activate pay bill form
-  steps:
-    - intent: pay_bill
-    - action: pay_bill_form
-    - active_loop: pay_bill_form
+# - rule: Activate loan application form
+#   steps:
+#       - intent: apply_loan
+#       - action: loan_application_form
+#       - active_loop: loan_application_form
 
-- rule: Submit pay bill form
-  condition:
-    - active_loop: pay_bill_form
-  steps:
-    - action: pay_bill_form
-    - active_loop: null
-    - action: utter_bill_paid
+# - rule: Submit loan application form
+#   condition:
+#   - active_loop: loan_application_form
+#   steps:
+#       - action: loan_application_form
+#       - active_loop: null
+#       - action: utter_submit_loan_application
 
-- rule: Activate card application form
-  steps:
-    - intent: apply_card
-    - action: card_application_form
-    - active_loop: card_application_form
+# - rule: Activate card application form
+#   steps:
+#     - intent: apply_card
+#     - action: card_application_form
+#     - active_loop: card_application_form
 
-- rule: Submit card application form
-  condition:
-    - active_loop: card_application_form
-  steps:
-    - action: card_application_form
-    - active_loop: null
-    - action: utter_submit_card_application
+# - rule: Submit card application form
+#   condition:
+#     - active_loop: card_application_form
+#   steps:
+#     - action: card_application_form
+#     - active_loop: null
+#     - action: utter_submit_card_application
 
-- rule: Say Goodbye
-  steps:
-    - intent: goodbye
-    - action: utter_goodbye
-
-- rule: Help
-  steps:
-    - intent: help
-    - action: utter_help
-
-- rule: Contact Support
-  steps:
-    - intent: contact_support
-    - action: utter_contact_support
-
-- rule: Feedback
-  steps:
-    - intent: feedback
-    - action: utter_feedback
-
-- rule: Out of Scope
-  steps:
-    - intent: out_of_scope
-    - action: utter_out_of_scope
-
-- rule: Fallback
-  steps:
-    - intent: nlu_fallback
-    - action: utter_ask_rephrase        
-
-- rule: Stop form (simple)
-  steps:
-  - intent: stop
-  - action: action_deactivate_loop

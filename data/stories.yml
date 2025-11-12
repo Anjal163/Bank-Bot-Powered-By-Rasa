@@ -1,33 +1,57 @@
 version: "3.1"
 
 stories:
-- story: apply for card flow
+- story: User opens a new account
   steps:
-    - intent: apply_card
-    - action: card_application_form
-    - active_loop: card_application_form
-    - active_loop: null
-    - action: utter_submit_card_application
-
-- story: show recent transactions
-  steps:
-  - intent: show_recent_transactions
-  - action: utter_ask_account_number
-  - intent: provide_account_number
-  - action: action_show_recent_transactions
-
-- story: check balance story
-  steps:
-  - intent: check_balance
-  - action: utter_ask_account_type
-  - intent: provide_account_type
-  - action: utter_ask_account_number
-  - intent: provide_account_number
-  - action: action_check_balance
-
-- story: Stop form flow
-  steps:
-  - intent: stop
-  - action: action_deactivate_loop
+  - intent: open_account
+  - action: open_account_form
+  - active_loop: open_account_form
+  - slot_was_set:
+      - name: "Anjal Nigam"
+      - phone: "9000000001"
+      - email: "anjal@bank.com"
+      - account_type: "Savings"
+      - balance: "5000"
   - active_loop: null
-  - action: utter_goodbye  
+  - action: action_submit_account
+
+- story: minimum balance flow
+  steps:
+    - intent: minimum_balance
+    - action: minimum_balance_form
+    - active_loop: minimum_balance_form
+    - intent: provide_account_type
+    - action: minimum_balance_form
+    - active_loop: null
+    - action: action_minimum_balance
+
+# - story: apply for card flow
+#   steps:
+#     - intent: apply_card
+#     - action: card_application_form
+#     - active_loop: card_application_form
+#     - active_loop: null
+#     - action: utter_submit_card_application
+
+# - story: show recent transactions
+#   steps:
+#   - intent: show_recent_transactions
+#   - action: utter_ask_account_number
+#   - intent: provide_account_number
+#   - action: action_show_recent_transactions
+
+# - story: check balance story
+#   steps:
+#   - intent: check_balance
+#   - action: utter_ask_account_type
+#   - intent: provide_account_type
+#   - action: utter_ask_account_number
+#   - intent: provide_account_number
+#   - action: action_check_balance
+
+# - story: Stop form flow
+#   steps:
+#   - intent: stop
+#   - action: action_deactivate_loop
+#   - active_loop: null
+#   - action: utter_goodbye  

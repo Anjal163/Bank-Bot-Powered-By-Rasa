@@ -1,0 +1,52 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-deposit_amount",
+      "2": "I-deposit_amount",
+      "3": "L-deposit_amount",
+      "4": "U-deposit_amount",
+      "5": "B-email",
+      "6": "I-email",
+      "7": "L-email",
+      "8": "U-email",
+      "9": "B-loan_type",
+      "10": "I-loan_type",
+      "11": "L-loan_type",
+      "12": "U-loan_type",
+      "13": "B-name",
+      "14": "I-name",
+      "15": "L-name",
+      "16": "U-name",
+      "17": "B-phone_number",
+      "18": "I-phone_number",
+      "19": "L-phone_number",
+      "20": "U-phone_number",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-deposit_amount": 1,
+      "I-deposit_amount": 2,
+      "L-deposit_amount": 3,
+      "U-deposit_amount": 4,
+      "B-email": 5,
+      "I-email": 6,
+      "L-email": 7,
+      "U-email": 8,
+      "B-loan_type": 9,
+      "I-loan_type": 10,
+      "L-loan_type": 11,
+      "U-loan_type": 12,
+      "B-name": 13,
+      "I-name": 14,
+      "L-name": 15,
+      "U-name": 16,
+      "B-phone_number": 17,
+      "I-phone_number": 18,
+      "L-phone_number": 19,
+      "U-phone_number": 20,
+      "O": 0
+    },
+    "num_tags": 21
+  }
+]
