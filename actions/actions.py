@@ -238,55 +238,59 @@ class ActionValidateOtp(Action):
         dispatcher.utter_message("✅ OTP verified successfully.")
         return []
 
-class ActionRecoverAccountNumber(Action):
-    def name(self):
-        return "action_recover_account_number"
+class ActionVerifyBalance(Action):
+    def name(self) -> str:
+        return "action_verify_balance"
 
-    def run(self, dispatcher, tracker, domain):
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict):
         email = tracker.get_slot("email")
 
         if not email:
-            dispatcher.utter_message("Email not found.")
+            dispatcher.utter_message("Please provide your registered email address.")
             return []
 
-        rec = otps.find_one({"email": email})
+        # ✅ Look up the customer's balance using their email
+        customer = customers.find_one({"email": email})
 
-        if not rec:
-            dispatcher.utter_message("No account found for this email.")
+        if not customer:
+            dispatcher.utter_message(f"❌ No account found with the email: {email}.")
             return []
 
-        account_number = rec.get("account_number")
-
-        if not account_number:
-            dispatcher.utter_message("Account number not available in database.")
+        balance = customer.get("balance", None)
+        if not balance:
+            dispatcher.utter_message("⚠️ Unable to fetch your balance at the moment.")
             return []
 
+        # 🟢 If everything is fine
         dispatcher.utter_message(
-            response="utter_account_number_recovered",
-            account_number=account_number
+            text=f"💰 Your current account balance (linked to {email}) is ₹{balance}."
         )
 
-        return [SlotSet("account_number", account_number)]
+        return []
 
-class ActionCheckBalance(Action):
+from rasa_sdk import Action
+from rasa_sdk.events import SlotSet
+
+class ActionMiniStatement(Action):
     def name(self):
-        return "action_check_balance"
+        return "action_mini_statement"
 
     def run(self, dispatcher, tracker, domain):
+        phone = tracker.get_slot("phone")
 
-        email = tracker.get_slot("email")
-        if not email:
-            dispatcher.utter_message("Email missing!")
+        if not phone:
+            dispatcher.utter_message(text="Please provide your registered phone number.")
             return []
 
-        user = customers.find_one({"email": email})
+        dispatcher.utter_message(text=f"Here’s your mini statement for {phone}:")
+        dispatcher.utter_message(text="""
+            10 Nov: Coffee Shop ☕ ₹250  
+            08 Nov: Salary Credit 💸 ₹45,000  
+            07 Nov: Electricity Bill ⚡ ₹1,200  
+            06 Nov: Online Shopping 🛒 ₹2,500  
+            05 Nov: Movie Tickets 🎬 ₹400
+        """)
+        return []
 
-        if not user:
-            dispatcher.utter_message("No account found with this email.")
-            return []
-
-        balance = user.get("balance", "Not available")
-
-        return [SlotSet("balance", str(balance))]
 
 

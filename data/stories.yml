@@ -25,33 +25,36 @@ stories:
     - active_loop: null
     - action: action_minimum_balance
 
-# - story: apply for card flow
-#   steps:
-#     - intent: apply_card
-#     - action: card_application_form
-#     - active_loop: card_application_form
-#     - active_loop: null
-#     - action: utter_submit_card_application
+- story: Check balance flow
+  steps:
+    - intent: check_balance
+    - action: utter_ask_email
+    - intent: provide_email
+      entities:
+        - email: "rahul.mehta@gmail.com"
+    - action: action_send_otp_email
+    - action: utter_ask_otp
+    - intent: provide_otp
+      entities:
+        - otp: "563290"
+    - action: action_validate_otp
+    - action: action_verify_balance
 
-# - story: show recent transactions
-#   steps:
-#   - intent: show_recent_transactions
-#   - action: utter_ask_account_number
-#   - intent: provide_account_number
-#   - action: action_show_recent_transactions
+- story: Update personal details
+  steps:
+    - intent: update_personal_details
+    - action: utter_update_personal_details
 
-# - story: check balance story
-#   steps:
-#   - intent: check_balance
-#   - action: utter_ask_account_type
-#   - intent: provide_account_type
-#   - action: utter_ask_account_number
-#   - intent: provide_account_number
-#   - action: action_check_balance
+- story: Account number lost
+  steps:
+    - intent: account_number_lost
+    - action: utter_account_number_lost
 
-# - story: Stop form flow
-#   steps:
-#   - intent: stop
-#   - action: action_deactivate_loop
-#   - active_loop: null
-#   - action: utter_goodbye  
+- story: display mini statement using phone number
+  steps:
+    - intent: request_mini_statement
+    - action: utter_ask_phone
+    - intent: provide_phone
+      entities:
+        - phone: "9455094680"
+    - action: action_mini_statement    

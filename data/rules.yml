@@ -470,87 +470,36 @@ rules:
     - active_loop: null
     - action: action_minimum_balance
 
-- rule: Ask email for account recovery
-  steps:
-    - intent: account_number_lost
-    - action: utter_ask_email_for_recovery
-
-- rule: Send OTP for account recovery
-  steps:
-    - intent: provide_email
-    - action: action_send_otp_email
-    - action: utter_ask_otp
-
-- rule: Recover account after OTP verified
-  steps:
-    - intent: provide_otp
-    - action: action_validate_otp
-    - action: action_recover_account_number
-    - action: utter_account_number_recovered
-
-- rule: Ask email for balance check
-  steps:
-    - intent: check_balance
-    - action: utter_ask_email_balance
-
-- rule: Send OTP for balance check
-  steps:
-    - intent: provide_email
-    - action: action_send_otp_email
-    - action: utter_ask_otp
-
-- rule: Show balance after OTP verified
-  steps:
-    - action: action_validate_otp
-    - action: action_check_balance
-    - action: utter_balance_success
-
-
-
-- rule: Update personal details
+- rule: Handle updating personal details
   steps:
     - intent: update_personal_details
-    - action: utter_update
+    - action: utter_update_personal_details
 
-# - rule: Start balance form
-#   steps:
-#     - intent: check_balance
-#     - action: balance_form
-#     - active_loop: balance_form
+- rule: Handle lost account number
+  steps:
+    - intent: account_number_lost
+    - action: utter_account_number_lost
 
-# - rule: Submit balance form
-#   condition:
-#     - active_loop: balance_form
-#   steps:
-#     - action: balance_form
-#     - active_loop: null
-#     - action: utter_show_balance
+- rule: Handle check balance process
+  steps:
+    - intent: check_balance
+    - action: utter_ask_email
 
-# - rule: Activate loan application form
-#   steps:
-#       - intent: apply_loan
-#       - action: loan_application_form
-#       - active_loop: loan_application_form
+- rule: Send OTP after user provides email for balance check
+  steps:
+      - intent: provide_email
+      - action: action_send_otp_email
+      - action: utter_ask_otp
 
-# - rule: Submit loan application form
-#   condition:
-#   - active_loop: loan_application_form
-#   steps:
-#       - action: loan_application_form
-#       - active_loop: null
-#       - action: utter_submit_loan_application
+- rule: Validate OTP and show balance
+  steps:
+      - intent: provide_otp
+      - action: action_validate_otp
+      - action: action_verify_balance
 
-# - rule: Activate card application form
-#   steps:
-#     - intent: apply_card
-#     - action: card_application_form
-#     - active_loop: card_application_form
+- rule: Display mini statement after phone number
+  steps:
+    - intent: provide_phone
+    - action: action_mini_statement
 
-# - rule: Submit card application form
-#   condition:
-#     - active_loop: card_application_form
-#   steps:
-#     - action: card_application_form
-#     - active_loop: null
-#     - action: utter_submit_card_application
 

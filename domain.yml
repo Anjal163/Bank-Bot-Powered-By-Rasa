@@ -11,12 +11,12 @@ intents:
   - dormant_account_reactivation
   - nominee_details
   - joint_account_info
-  - update_personal_details #M
-  - account_number_lost #M
+  - update_personal_details 
+  - account_number_lost 
 
   # 🔹 Balance & Transactions
   - check_balance #M
-  # - mini_statement #M
+  - request_mini_statement #Mnono
   - transaction_history 
   - transaction_status
   - fund_transfer
@@ -27,11 +27,11 @@ intents:
   - auto_debit_enquiry
 
   # 🔹 Cards
-  - apply_debit_card #M
-  - apply_credit_card #M
+  - apply_debit_card 
+  - apply_credit_card 
   - card_delivery_status 
-  - block_card #M
-  - unblock_card #M
+  - block_card 
+  - unblock_card 
   - set_pin
   - card_limit_change
   - international_usage
@@ -39,11 +39,11 @@ intents:
   - card_declined_reason
 
   # 🔹 Deposits & Loans
-  - open_fd #M
-  - close_fd #M
+  - open_fd 
+  - close_fd 
   - fd_interest_rate
-  - apply_loan #M
-  - provide_loan_type #M
+  - apply_loan 
+  - provide_loan_type 
   - loan_eligibility
   - loan_interest_rate
   - loan_repayment
@@ -52,15 +52,15 @@ intents:
   - loan_default_penalty
 
   # 🔹 Digital & Online Banking
-  - register_netbanking #M
-  - register_mobilebanking #M
-  - reset_password #M 
+  - register_netbanking 
+  - register_mobilebanking 
+  - reset_password 
   - two_factor_auth
   - upi_registration
   - upi_limit
   - upi_failed_transaction
   - security_settings
-  - update_mpin #M
+  - update_mpin 
   - email_alerts
 
   # 🔹 Statements & Certificates
@@ -68,10 +68,10 @@ intents:
   - interest_certificate
   - tds_details
   - check_passbook_status
-  - duplicate_statement_request #M
+  - duplicate_statement_request 
 
   # 🔹 Security & Support
-  - report_fraud #M
+  - report_fraud 
   - phishing_alert
   - account_lock
   - privacy_policy
@@ -92,19 +92,19 @@ intents:
   # 🔹 Offers & Promotions
   - credit_card_offers
   - loan_offers
-  - rewards_points #M
+  - rewards_points
   - festive_offers
-  - refer_friend #M
+  - refer_friend 
 
   # 🔹 Feedback & Miscellaneous
-  - update_kyc #M
+  - update_kyc 
   - branch_locator
   - working_hours
   - holiday_list
-  - feedback_complaint #M
+  - feedback_complaint 
   - foreign_exchange
   - cheque_status
-  - stop_cheque_payment #M
+  - stop_cheque_payment 
   - cheque_book_request
   - locker_facility
 
@@ -119,10 +119,8 @@ intents:
   - provide_name
   - provide_balance
   - provide_phone
-  - update_phone_number
   - provide_email
   - provide_otp
-  
 
 entities:
   - name
@@ -164,16 +162,12 @@ slots:
       - type: from_entity
         entity: phone
         intent: provide_phone
-        not_intent: provide_new_phone
 
   email:
     type: text
     mappings:
       - type: from_entity
         entity: email
-      # - type: from_intent
-      #   intent: provide_new_email
-      #   value: "{email}"
 
   otp:
     type: text
@@ -181,40 +175,6 @@ slots:
     mappings:
       - type: from_text
         intent: provide_otp
-
-  # account_number:
-  #   type: text
-  #   mappings:
-  #     - type: from_text
-  #       conditions:
-  #         - active_loop: balance_form
-  #           requested_slot: account_number
-  #     - type: from_entity
-  #       entity: account_number
-  #       conditions:
-  #         - active_loop: balance_form
-  #           requested_slot: account_number
-  #     - type: from_entity
-  #       entity: account_number
-
-  # loan_type:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #     - type: from_entity
-  #       entity: loan_type
-
-  # card_type:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #     - type: from_entity
-  #       entity: card_type
-  #       conditions:
-  #         - active_loop: card_application_form
-  #           requested_slot: card_type
-  #     - type: from_entity
-  #       entity: card_type
 
 responses:
 
@@ -486,9 +446,6 @@ responses:
 
   utter_ask_phone:
     - text: "Please share your mobile number." 
-  
-  utter_ask_email:
-    - text: "Provide your email address." 
 
   utter_ask_account_type:
     - text: "Thanks . Which type of account would you like(Savings/Current/Salary)"
@@ -499,38 +456,20 @@ responses:
   utter_min_balance:
     - text: "The minimum balance for {account_type} account is ₹{amount}."
 
+  utter_update_personal_details:
+    - text: "Sure! For updating your personal details, you’ll need to visit your bank branch. Our staff there will help you verify your identity and make the necessary updates."
+
+  utter_account_number_lost:
+    - text: "You can recover your account number through net banking or by checking the first page of your passbook."
+
+  utter_ask_email:
+    - text: "Could you please provide your email address?"
+
   utter_ask_otp:
-    - text: "Enter the 6-digit OTP sent to your email."
+    - text: "Great, I’ve sent a one-time password (OTP) to {email}. Please enter it to verify your account."
 
-  utter_update:
-    - text: " For updating your personal details you have to visit your branch or you can also do it through net banking!"
-
-  utter_ask_email_for_recovery:
-    - text: "Sure, I can help you recover your account number. Please enter your registered email address."
-
-  utter_account_number_recovered:
-    - text: "✅ Your account number is: {account_number}\nPlease save it safely."
-
-  utter_ask_email_balance:
-    - text: "Please enter your registered email to check your balance."
-
-  utter_balance_success:
-    - text: "✅ Your current account balance is: ₹{balance}"
-
-  # utter_show_balance:
-  #   - text: "Your balance for account {account_number} is ₹15,000."
-
-  # utter_ask_loan_type:
-  #   - text: "Which type of loan are you applying for? (Personal/Home/Car/Education)"
-
-  # utter_submit_loan_application:
-  #   - text: "Thank you! Your loan application has been submitted successfully."
-
-  # utter_ask_card_type:
-  #   - text: "Sure! Do you want to apply for a Credit Card or Debit Card?"
-
-  # utter_submit_card_application:
-  #   - text: "Great! Your {card_type} application has been submitted successfully for your {account_type} account!"
+  utter_check_balance:
+    - text: "Verified ✅. The balance for your account (linked to {email}) is ₹45,780.35 as of today."
 
   utter_default:
     - text: "I'm sorry, I didn’t quite understand that. 🤔 Can you rephrase?"  
@@ -548,39 +487,14 @@ forms:
     required_slots:
       - account_type
 
-  # balance_form:
-  #   required_slots:
-  #     - account_type
-  #     - account_number
-
-  # transfer_money_form:
-  #   required_slots:
-  #     - receiver_name
-  #     - amount
-
-  # loan_application_form:
-  #   required_slots:
-  #     - name
-  #     - loan_type
-
-  # pay_bill_form:
-  #   required_slots:
-  #     - bill_type
-  #     - bill_amount
-  
-  # card_application_form:
-  #   required_slots:
-  #     - card_type
-  #     - name
-  #     - account_type
 
 actions:
   - action_submit_account
   - action_minimum_balance
   - action_send_otp_email
   - action_validate_otp
-  - action_recover_account_number
-  - action_check_balance
+  - action_verify_balance
+  - action_mini_statement
 
 session_config:
   session_expiration_time: 60

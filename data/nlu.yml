@@ -200,18 +200,18 @@ nlu:
     - balance inquiry
     - what's my balance
 
-# - intent: mini_statement
-#   examples: |
-#     - Can you show my last 5 transactions?
-#     - Show me my recent transactions
-#     - Display my mini statement
-#     - I want to see my last few transactions
-#     - Give me the last 5 transaction details
-#     - What are my last transactions?
-#     - Show me my recent bank activity
-#     - Please provide my mini statement
-#     - Can I get a list of my last five debits and credits?
-#     - Display recent account activity
+- intent: request_mini_statement
+  examples: |
+    - Can you show my last 5 transactions?
+    - Show me my recent transactions
+    - Display my mini statement
+    - I want to see my last few transactions
+    - Give me the last 5 transaction details
+    - What are my last transactions?
+    - Show me my recent bank activity
+    - Please provide my mini statement
+    - Can I get a list of my last five debits and credits?
+    - Display recent account activity
 
 
 - intent: transaction_history
@@ -1293,16 +1293,15 @@ nlu:
     - The number is [9012345678](phone)
     - Please note my mobile number [9876500000](phone)
     - [9998887776](phone)
-    - my number is 9998887776
-    - phone number is 9998887776
-    - please update my mobile number to 9998887776
-
-- intent: update_phone_number
-  examples: |
-    - I want to update my personal details
-    - update my phone number
-    - change phone number
-    - I need to modify my contact number    
+    - my number is 9998887776(phone)
+    - phone number is 9998887776(phone)
+    - please update my mobile number to 9998887776(phone)
+    - 9876543210(phone)
+    - 9455094680(phone)
+    - my number is 9023456789(phone)
+    - here’s my phone 9234567890(phone)
+    - phone number is 9000011111(phone)
+    - it's 9123456789(phone)
 
 - intent: provide_email
   examples: |
@@ -1328,6 +1327,7 @@ nlu:
     - 445566
     - 556677
 
+
   # Phone number: 10 digits (optionally with +91 or 0)
 - regex: phone
   examples: |
@@ -1346,7 +1346,7 @@ nlu:
 - regex: otp
   examples: |
     - \d{6}
-    
+
 - lookup: balance
   examples: |
     - 100
@@ -1358,11 +1358,3 @@ nlu:
     - 2000
     - 5000
     - 10000
-
-# - lookup: otp
-#   examples: |
-#     - 123456
-#     - 987654
-#     - 112233
-#     - 445566
-#     - 000111
