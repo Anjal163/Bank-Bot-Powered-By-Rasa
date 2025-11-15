@@ -1142,6 +1142,7 @@ nlu:
     - What is the timing for customer service?
     - When can I visit the branch?
     - What are the bank opening hours?
+    - What time do branch locations open
 
 
 - intent: holiday_list
@@ -1327,6 +1328,21 @@ nlu:
     - 445566
     - 556677
 
+- intent: book_appointment
+  examples: |
+    -  how to book an appointment 
+    -  How can I schedule an appointment?
+    - i want to schedule appointment
+    - how to book slot
+    - how to fix a time for appointment
+    - how can i book a appointment    
+
+- intent: Emi_opt_personal
+  examples: |
+    - What are the EMI (Equated Monthly Installment) options available for a personal loan?
+    - provide me time duration to pay back the personal loan.
+    - pay back duration of personal loan.
+    - emi option avail on personal loan.
 
   # Phone number: 10 digits (optionally with +91 or 0)
 - regex: phone

@@ -502,4 +502,14 @@ rules:
     - intent: provide_phone
     - action: action_mini_statement
 
+- rule: Booking an appointment
+  steps: 
+    - intent: book_appointment
+    - action: utter_book_appointment 
+
+- rule: Emi options for personal loan
+  steps: 
+    - intent: Emi_opt_personal
+    - action: utter_emi_options_personal      
+
 

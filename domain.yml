@@ -121,6 +121,8 @@ intents:
   - provide_phone
   - provide_email
   - provide_otp
+  - book_appointment
+  - Emi_opt_personal
 
 entities:
   - name
@@ -181,13 +183,13 @@ responses:
 # Single Turn Convos
   
   utter_account_status:
-    - text: "To check your account status, please log in to your net banking or mobile banking app. You can also visit your nearest branch to confirm whether your account is active, frozen, or dormant."
+    - text: "To check your account status, please log in to our net banking or mobile banking app of smart bank. You can also visit your nearest branch of smart bank to confirm whether your account is active, frozen, or dormant."
 
   utter_close_account:
-    - text: "To close your account, please visit your home branch with your ID proof, passbook, and cheque book. Some accounts can also be closed via a written request submitted online through the bank portal."
+    - text: "To close your account, please visit your home branch of smart bank with your ID proof, passbook, and cheque book. Some accounts can also be closed via a written request submitted online through the bank portal."
 
   utter_dormant_account_reactivation:
-    - text: "If your account has become dormant due to inactivity, you can reactivate it by visiting your branch with valid ID proof and performing a small transaction like a deposit or withdrawal."
+    - text: "If your account has become dormant due to inactivity, you can reactivate it by visiting our smart bank branch with valid ID proof and performing a small transaction like a deposit or withdrawal."
 
   utter_nominee_details:
     - text: "You can add, view, or update your nominee details through internet banking or by submitting a nomination form (DA1) at your home branch."
@@ -196,7 +198,7 @@ responses:
     - text: "A joint account allows two or more individuals to share account ownership. You can open one by visiting the branch with all account holders’ KYC documents and photos."
 
   utter_transaction_history:
-    - text: "You can check your complete transaction history using your bank’s mobile or net banking portal. Go to the 'Transaction History' or 'Account Statement' section to view and download past transactions."
+    - text: "You can check your complete transaction history using your bank’s mobile or net banking portal of smart bank. Go to the 'Transaction History' or 'Account Statement' section to view and download past transactions."
 
   utter_transaction_status:
     - text: "You can verify your transaction status through the 'Transaction History' section of your mobile banking app. For failed or pending transactions, please wait a few minutes or contact customer care with the transaction ID."
@@ -214,7 +216,7 @@ responses:
     - text: "Refunds for failed transactions typically take between 3 to 7 working days, depending on the payment mode. If it takes longer, please share the transaction reference ID with customer care."
 
   utter_bank_charges:
-    - text: "Bank service charges vary by transaction type. NEFT/IMPS/RTGS transfers may have small fees, while UPI is usually free. You can view the detailed charge list on the bank’s website or through customer care."
+    - text: "service charges of smart bank  vary by transaction type. NEFT/IMPS/RTGS transfers may have small fees, while UPI is usually free. You can view the detailed charge list on the bank’s website or through customer care."
 
   utter_auto_debit_enquiry:
     - text: "Auto-debit lets your bills or EMIs be paid automatically from your account. You can activate or cancel auto-debit instructions from your bank’s app, website, or by submitting a request at your branch."
@@ -235,7 +237,7 @@ responses:
     - text: "To unblock your card, please visit the branch or use your mobile banking app after verifying your identity. This ensures your account remains secure."
 
   utter_set_pin:
-    - text: "You can set or reset your card PIN through the bank’s ATM, mobile banking app, or net banking. For your safety, avoid sharing your PIN with anyone."
+    - text: "You can set or reset your card PIN through the smart bank’s ATM, mobile banking app, or net banking. For your safety, avoid sharing your PIN with anyone."
 
   utter_card_limit_change:
     - text: "To change your card’s spending or withdrawal limit, log in to your mobile banking app or net banking portal. You can view, increase, or decrease your limit instantly."
@@ -283,10 +285,10 @@ responses:
     - text: "If you miss an EMI payment, a late payment fee and additional interest may be charged. Repeated defaults can affect your credit score and may lead to legal action."
 
   utter_register_netbanking:
-    - text: "To register for net banking, visit our official website and click on 'New User Registration'. Enter your account number, registered mobile number, and follow the OTP verification process to set your login password."
+    - text: "To register for net banking, visit our official website of smart bank  and click on 'New User Registration'. Enter your account number, registered mobile number, and follow the OTP verification process to set your login password."
 
   utter_register_mobilebanking:
-    - text: "To activate mobile banking, download our official mobile app from the Play Store or App Store. Open the app, select 'New Registration', and complete verification using your registered mobile number and debit card details."
+    - text: "To activate mobile banking, download our official mobile app from the Play Store or App Store that smart app for our smart consumers. Open the app, select 'New Registration', and complete verification using your registered mobile number and debit card details."
 
   utter_reset_password:
     - text: "If you’ve forgotten your login password, go to the net banking login page and click 'Forgot Password'. Enter your account details and verify using OTP to reset your password securely."
@@ -340,7 +342,7 @@ responses:
     - text: "We value your privacy. Your data is stored and processed in compliance with RBI and IT Act guidelines. You can read our full privacy policy at https://smartbank.com/privacy-policy."
 
   utter_customer_support_contact:
-    - text: "You can reach our customer support 24x7 at 1800-123-0000 or email support@smartbank.com. You can also chat with a live agent for urgent issues during business hours."
+    - text: "You can reach our customer support of smart bank 24x7 at 1800-123-0000 or email support@smartbank.com. You can also chat with a live agent for urgent issues during business hours."
 
   utter_difference_savings_current:
     - text: "A Savings Account is meant for personal use and helps you save money while earning interest. A Current Account is mainly for businesses and allows higher transaction limits but usually doesn't earn interest."
@@ -385,7 +387,7 @@ responses:
     - text: "Celebrate the festive season with exclusive offers! Get zero processing fees on home and car loans, and 10% cashback on select credit cards. Offers valid till 31st December—apply today!"
 
   utter_refer_friend:
-    - text: "Refer your friends to open an account and earn ₹500 cashback when they complete their first transaction. Share your referral code from the mobile banking app’s 'Refer & Earn' section."
+    - text: "Refer your friends to open an account in smart bank and earn ₹500 cashback when they complete their first transaction. Share your referral code from the mobile banking app’s 'Refer & Earn' section."
 
   utter_update_kyc:
     - text: "To update your KYC, please visit your nearest branch with valid ID proof and address proof such as Aadhaar or PAN card. Some updates can also be done online through the net banking portal under 'Profile Settings'."
@@ -418,10 +420,10 @@ responses:
     - text: "Our bank offers locker facilities at select branches. Locker sizes and rental charges vary by location. You can apply for one by visiting your branch with valid ID proof and account details."
 
   utter_greet:
-  - text: "Hello! 👋 I’m your Bank Assistant. How may I help you today?"
+  - text: "Hello! 👋 I’m your Assistant from your most trusted Smart Bank . How may I serve you today?"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Bye, have a nice day ahead from smart bank team"
   
   utter_affirm:
     - text: "Great! Let's continue."
@@ -448,10 +450,10 @@ responses:
     - text: "Please share your mobile number." 
 
   utter_ask_account_type:
-    - text: "Thanks . Which type of account would you like(Savings/Current/Salary)"
+    - text: "Thanks . Which type of account would you like(Savings/Current)"
 
   utter_ask_account_type_min_balance:
-    - text: "Sure! For which account type — Savings, Current, or Salary?"
+    - text: "Sure! For which account type — Savings, Current?"
 
   utter_min_balance:
     - text: "The minimum balance for {account_type} account is ₹{amount}."
@@ -471,8 +473,15 @@ responses:
   utter_check_balance:
     - text: "Verified ✅. The balance for your account (linked to {email}) is ₹45,780.35 as of today."
 
+  utter_book_appointment:
+    - text: "To schedule an appointment you have to visit our official website that's smart bank." 
+
+  utter_emi_options_personal:
+    - text:  "We have various options available for EMIs starting from 6 months to longer till 5 years.We serve to provide you best emi plans with lowest interest rates."   
+
   utter_default:
-    - text: "I'm sorry, I didn’t quite understand that. 🤔 Can you rephrase?"  
+    - text: "I'm sorry, I didn’t quite understand that. 🤔 Can you rephrase?"
+    
 
 forms:
   open_account_form:
