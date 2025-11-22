@@ -296,30 +296,6 @@ async function sendMessage() {
   }
 }
 
-
-// function appendMessage(text, sender) {
-//   const chatBox = document.getElementById('chat-box');
-//   const msgDiv = document.createElement('div');
-//   msgDiv.classList.add('message', sender);
-
-//   if (sender === 'bot') {
-//       msgDiv.innerHTML = `
-//     <span class="bot-html">${text}</span>
-//     <button class="audio-btn"
-//         onclick="speakText('${text.replace(/'/g, "\\'")}')" 
-//         style="margin-left:10px; background:none; border:none; cursor:pointer; font-size:18px;">
-//         🔊
-//     </button>
-//       `;
-//   } else {
-//       // User message stays normal
-//       msgDiv.textContent = text;
-//   }
-
-//   chatBox.appendChild(msgDiv);
-//   scrollToBottom();
-// }
-
 // -------------------------------
 // Strip HTML before speech
 // -------------------------------

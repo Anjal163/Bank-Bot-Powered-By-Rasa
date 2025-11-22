@@ -522,4 +522,4 @@ rules:
   steps:
     - intent: request_human_agent
     - action: utter_handoff_message
-    - action: action_handoff_to_agent    
+    - action: action_handoff_to_agent
