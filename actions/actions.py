@@ -1,42 +1,3 @@
-# from rasa_sdk import Action, Tracker
-# from rasa_sdk.executor import CollectingDispatcher
-# from pymongo import MongoClient
-
-# class ActionShowTransactions(Action):
-
-#     def name(self) -> str:
-#         return "action_show_recent_transactions"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: dict):
-
-#         # Connect to MongoDB
-#         client = MongoClient("mongodb://localhost:27017/")
-#         db = client["Bankbot"]
-#         transactions = db["transactions"]
-
-#         # Get account number (you can modify this to extract from slot)
-#         account_number = "12345678"
-
-#         # Fetch last 3 transactions
-#         recent_txns = list(transactions.find(
-#             {"account_number": account_number}
-#         ).sort("date", -1).limit(3))
-
-#         if not recent_txns:
-#             dispatcher.utter_message(text="No recent transactions found.")
-#             return []
-
-#         # Format the reply
-#         reply = "Here are your recent transactions:\n"
-#         for txn in recent_txns:
-#             reply += f"- {txn['date']}: {txn['description']} ₹{txn['amount']}\n"
-
-#         dispatcher.utter_message(text=reply)
-#         return []
-
-
 import os
 import smtplib
 import ssl
@@ -48,74 +9,7 @@ from rasa_sdk.executor import CollectingDispatcher
 from pymongo import MongoClient
 from rasa_sdk.events import SlotSet
 from email.message import EmailMessage
-
-
-class ActionSubmitAccount(Action):
-
-    def name(self):
-        return "action_submit_account"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: dict):
-        # 1️⃣ Collect user inputs from slots
-        name = tracker.get_slot("name")
-        phone = tracker.get_slot("phone")
-        email = tracker.get_slot("email")
-        account_type_data = tracker.get_slot("account_type")
-
-        # Handle if account_type comes as dict or text
-        if isinstance(account_type_data, dict):
-            account_type = account_type_data.get("text", "")
-        else:
-            account_type = account_type_data
-
-        balance = tracker.get_slot("balance")
-
-        # ✅ Basic input cleanup
-        if not name or not phone or not email:
-            dispatcher.utter_message(text="Some required details are missing. Please try again.")
-            return []
-
-        # 2️⃣ Connect to MongoDB
-        client = MongoClient("mongodb://localhost:27017/")
-        db = client["bankDB"]           # Replace with your DB name
-        customers = db["customers"]     # Your collection
-
-        # 3️⃣ Count existing records to generate sequential IDs
-        total_customers = customers.count_documents({})
-        customer_id = total_customers + 1
-
-        # 4️⃣ Generate 10-digit Account Number (e.g., 10000001)
-        account_no = str(10000000 + customer_id)
-
-        # 5️⃣ Generate password based on first name and cust_id
-        first_name = name.split()[0].capitalize()
-        password = f"#{first_name}{customer_id}"
-
-        # 6️⃣ Insert new record into MongoDB
-        new_customer = {
-            "customer_id": customer_id,
-            "name": name,
-            "account_no": account_no,
-            "balance": float(balance),
-            "phone": phone,
-            "email": email,
-            "account_type": account_type,
-            "password": password
-        }
-
-        customers.insert_one(new_customer)
-
-        # 7️⃣ Respond to user dynamically
-        response = (
-            f"Thank you {name}! 🎉 Your {account_type.capitalize()} account has been successfully created.\n\n"
-            f"Customer ID: {customer_id}\n"
-            f"Account Number: {account_no}\n"
-            f"Temporary Password: {password}\n\n"
-            f"Please log in using your registered phone number and change your password after first login."
-        )
-
-        dispatcher.utter_message(text=response)
-        return []
+import requests
 
 class ActionMinimumBalance(Action):
 
@@ -292,5 +186,29 @@ class ActionMiniStatement(Action):
         """)
         return []
 
+class ActionHandoffToAgent(Action):
+
+    def name(self):
+        return "action_handoff_to_agent"
+
+    def run(self, dispatcher, tracker, domain):
+
+        user_message = tracker.latest_message.get("text")
+        sender_id = tracker.sender_id
+
+        # Send notification to your backend admin panel / email / support
+        requests.post(
+            "http://localhost:8000/notify-agent",   # FastAPI endpoint for agents
+            json={
+                "sender_id": sender_id,
+                "message": user_message
+            }
+        )
+
+        dispatcher.utter_message(
+            text="I'm connecting you to a human support agent. Please wait…"
+        )
+
+        return []
 
 

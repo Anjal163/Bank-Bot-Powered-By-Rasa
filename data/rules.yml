@@ -442,19 +442,10 @@ rules:
   - intent: nlu_fallback
   - action: utter_ask_rephrase
 
-- rule: Activate open account form
+- rule: Open account rule
   steps:
-  - intent: open_account
-  - action: open_account_form
-  - active_loop: open_account_form
-
-- rule: Submit open account form
-  condition:
-  - active_loop: open_account_form
-  steps:
-  - action: open_account_form
-  - active_loop: null
-  - action: action_submit_account
+    - intent: open_account
+    - action: utter_open_account
 
 - rule: Ask account type to give minimum balance
   steps:
@@ -512,4 +503,23 @@ rules:
     - intent: Emi_opt_personal
     - action: utter_emi_options_personal      
 
+- rule: Bill payment flow
+  steps:
+    - intent: bill_payment
+    - action: utter_bill_payment
 
+- rule: Handle request for another person's balance
+  steps:
+    - intent: request_others_balance
+    - action: utter_cannot_share_others_balance
+
+- rule: Notify on session start after timeout
+  steps:
+    - action: action_session_start
+    - action: utter_session_expired
+
+- rule: Handoff to human agent
+  steps:
+    - intent: request_human_agent
+    - action: utter_handoff_message
+    - action: action_handoff_to_agent    

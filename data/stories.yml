@@ -1,19 +1,6 @@
 version: "3.1"
 
 stories:
-- story: User opens a new account
-  steps:
-  - intent: open_account
-  - action: open_account_form
-  - active_loop: open_account_form
-  - slot_was_set:
-      - name: "Anjal Nigam"
-      - phone: "9000000001"
-      - email: "anjal@bank.com"
-      - account_type: "Savings"
-      - balance: "5000"
-  - active_loop: null
-  - action: action_submit_account
 
 - story: minimum balance flow
   steps:

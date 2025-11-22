@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Smart Bank - Lumi Chatbot</title>
 <style>
+  .listening-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #111;
+  border-radius: 15px;
+  width: fit-content;
+  animation: fadeIn 0.3s ease-in-out;
+  font-weight: 600;
+}
+
+.listening-dots span {
+  width: 8px;
+  height: 8px;
+  background: #111;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.2s infinite both;
+}
+
+.listening-dots span:nth-child(2) { animation-delay: 0.2s; }
+.listening-dots span:nth-child(3) { animation-delay: 0.4s; }
+
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
   body {
     font-family: 'Poppins', sans-serif;
@@ -170,6 +196,13 @@
   }
   .typing div:nth-child(2) { animation-delay: 0.2s; }
   .typing div:nth-child(3) { animation-delay: 0.4s; }
+  
+  .bot-html a {
+    color: #1E40AF;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
   @keyframes blink {
     0% { opacity: 0.2; }
@@ -191,18 +224,37 @@
       <img src="static/Bankbot_logo.png" alt="Bank Logo">
       Smart Bank - Lumi
     </div>
+  
 
     <div class="chat-box" id="chat-box">
       <div class="message bot">Hi! I’m your virtual assistant Lumi. How can I help you today?</div>
     </div>
 
-    <div class="input-box">
-      <input id="user-input" type="text" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendMessage()" />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
+  <div class="input-box">
+    <button id="mic-btn" 
+            style="background:#1E3A8A;color:white;border:none;padding:10px 15px;
+            margin-right:10px;border-radius:50%;cursor:pointer;font-size:18px;">
+        🎤
+    </button>
+
+    <input id="user-input" type="text" placeholder="Type your message..." 
+          onkeydown="if(event.key==='Enter') sendMessage()" />
+
+    <button onclick="sendMessage()">Send</button>
+</div>
 
 <script>
+
+  // ------------------------------
+// Unique Sender ID for each user
+// ------------------------------
+let senderID = localStorage.getItem("senderID");
+
+if (!senderID) {
+    senderID = "user_" + crypto.randomUUID();
+    localStorage.setItem("senderID", senderID);
+}
+
 async function sendMessage() {
   const input = document.getElementById('user-input');
   const message = input.value.trim();
@@ -232,8 +284,11 @@ async function sendMessage() {
     if (replies.length === 0) appendMessage('No response from bot.', 'bot');
 
     replies.forEach((reply, index) => {
-      setTimeout(() => appendMessage(reply, 'bot'), index * 300);
-    });
+    setTimeout(() => {
+        appendMessage(reply, 'bot');
+        // speakText(reply);   // make bot speak
+    }, index * 300);
+});
 
   } catch (error) {
     typingIndicator.remove();
@@ -241,19 +296,156 @@ async function sendMessage() {
   }
 }
 
-function appendMessage(text, sender) {
-  const chatBox = document.getElementById('chat-box');
-  const msgDiv = document.createElement('div');
-  msgDiv.classList.add('message', sender);
-  msgDiv.textContent = text;
-  chatBox.appendChild(msgDiv);
-  scrollToBottom();
+
+// function appendMessage(text, sender) {
+//   const chatBox = document.getElementById('chat-box');
+//   const msgDiv = document.createElement('div');
+//   msgDiv.classList.add('message', sender);
+
+//   if (sender === 'bot') {
+//       msgDiv.innerHTML = `
+//     <span class="bot-html">${text}</span>
+//     <button class="audio-btn"
+//         onclick="speakText('${text.replace(/'/g, "\\'")}')" 
+//         style="margin-left:10px; background:none; border:none; cursor:pointer; font-size:18px;">
+//         🔊
+//     </button>
+//       `;
+//   } else {
+//       // User message stays normal
+//       msgDiv.textContent = text;
+//   }
+
+//   chatBox.appendChild(msgDiv);
+//   scrollToBottom();
+// }
+
+// -------------------------------
+// Strip HTML before speech
+// -------------------------------
+function stripHTML(html) {
+    let tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
 }
+
+// -------------------------------
+// Safe Append Message
+// -------------------------------
+function appendMessage(text, sender) {
+    const chatBox = document.getElementById('chat-box');
+
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('message', sender);
+
+    if (sender === 'bot') {
+        // Create text span (renders HTML properly)
+        const span = document.createElement('span');
+        span.className = "bot-html";
+        span.innerHTML = text;
+
+        // Create audio button safely (no inline JS errors)
+        const audioBtn = document.createElement('button');
+        audioBtn.className = "audio-btn";
+        audioBtn.textContent = '🔊';
+        audioBtn.style.marginLeft = "10px";
+        audioBtn.style.background = "none";
+        audioBtn.style.border = "none";
+        audioBtn.style.cursor = "pointer";
+        audioBtn.style.fontSize = "18px";
+
+        audioBtn.addEventListener("click", () => {
+            const clean = stripHTML(text);
+            speakText(clean);
+        });
+
+        msgDiv.appendChild(span);
+        msgDiv.appendChild(audioBtn);
+
+    } else {
+        msgDiv.textContent = text;  // Plain user message
+    }
+
+    chatBox.appendChild(msgDiv);
+    scrollToBottom();
+}
+
 
 function scrollToBottom() {
   const chatBox = document.getElementById('chat-box');
   chatBox.scrollTop = chatBox.scrollHeight;
 }
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
+recognition.lang = "hi-IN";
+
+
+recognition.interimResults = false;
+
+document.getElementById("mic-btn").onclick = function () {
+    recognition.start();
+};
+
+recognition.onstart = function () {
+    showListening();
+};
+
+recognition.onerror = function (event) {
+    console.log("Speech error:", event.error);
+    hideListening();
+};
+
+recognition.onend = function () {
+    hideListening();
+};
+
+recognition.onresult = function (event) {
+    hideListening();
+
+    let text = event.results[0][0].transcript;
+    console.log("User said:", text);
+
+    document.getElementById("user-input").value = text;
+    sendMessage();
+};
+
+let listeningIndicator = null;
+
+function showListening() {
+    const chatBox = document.getElementById("chat-box");
+
+    listeningIndicator = document.createElement("div");
+    listeningIndicator.className = "listening-indicator";
+
+    listeningIndicator.innerHTML = `
+        🎙 Listening...
+        <div class="listening-dots">
+            <span></span><span></span><span></span>
+        </div>
+    `;
+
+    chatBox.appendChild(listeningIndicator);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Hide animation
+function hideListening() {
+    if (listeningIndicator) {
+        listeningIndicator.remove();
+        listeningIndicator = null;
+    }
+}
+// ---------------------------------------------
+// 📢 Function to speak bot replies
+// ---------------------------------------------
+function speakText(text) {
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "en-IN"; 
+    msg.rate = 1;
+    msg.pitch = 1;
+    window.speechSynthesis.speak(msg);
+}
+
 </script>
 </body>
 </html>

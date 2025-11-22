@@ -199,6 +199,7 @@ nlu:
     - show me my account balance
     - balance inquiry
     - what's my balance
+    - whut's balnc
 
 - intent: request_mini_statement
   examples: |
@@ -1343,6 +1344,39 @@ nlu:
     - provide me time duration to pay back the personal loan.
     - pay back duration of personal loan.
     - emi option avail on personal loan.
+
+- intent: bill_payment
+  examples: |
+    - I want to pay a bill
+    - How can I do online bill pay?
+    - I’d like to setup bill payment
+    - Pay my electricity bill please
+    - I want to use Bill Pay for my account
+    - Where can I pay my bills using SmartBank?
+    - Online bill pay service
+    - I want to schedule a bill payment
+
+- intent: request_others_balance
+  examples: |
+    - tell me my friend's account balance
+    - can you check someone else's balance?
+    - i want to know my friend's balance
+    - can you tell me another person's account balance?
+    - check my friend's bank account balance
+    - what is my brother's account balance?
+    - check someone’s account information
+    - how much balance does my friend have?
+
+- intent: request_human_agent
+  examples: |
+    - I want to talk to a human
+    - connect me to an agent
+    - I want a live agent
+    - I need customer support
+    - transfer me to a human
+    - talk to human
+    - customer care please
+    - I want to chat with a real person
 
   # Phone number: 10 digits (optionally with +91 or 0)
 - regex: phone
