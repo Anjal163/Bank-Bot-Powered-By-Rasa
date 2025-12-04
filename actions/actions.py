@@ -206,7 +206,7 @@ class ActionHandoffToAgent(Action):
         )
 
         dispatcher.utter_message(
-            text="I'm connecting you to a human support agent. Please wait…"
+            text="You can connect with a human support agent. Please call at this number 1800 900 321"
         )
 
         return []

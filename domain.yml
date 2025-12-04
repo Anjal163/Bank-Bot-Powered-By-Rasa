@@ -792,8 +792,7 @@ responses:
 
   utter_handoff_message:
     - text: |
-        Sure! I'm transferring you to a SmartBank support agent.  
-        Please wait a moment while I connect you.
+        Sure! You can connect with a human support agent. Please call at this number 1800 900 321
 
   utter_default:
     - text: "I'm sorry, I didn’t quite understand that. 🤔 Can you rephrase?"

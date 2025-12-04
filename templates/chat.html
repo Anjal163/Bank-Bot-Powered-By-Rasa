@@ -241,7 +241,22 @@
           onkeydown="if(event.key==='Enter') sendMessage()" />
 
     <button onclick="sendMessage()">Send</button>
+
 </div>
+<a href="/admin/login"
+  style="
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #007bff;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+  ">
+Admin Login
+</a>
 
 <script>
 
@@ -421,6 +436,34 @@ function speakText(text) {
     msg.pitch = 1;
     window.speechSynthesis.speak(msg);
 }
+
+// ------------------------------
+// AUTO LOGOUT AFTER INACTIVITY
+// ------------------------------
+let inactivityTimer;
+const AUTO_LOGOUT_TIME = 3 * 60 * 1000; // 3 minutes
+
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(() => {
+        alert("Your session expired due to inactivity.");
+        document.cookie = "logged_in=false; path=/"; 
+        window.location.href = "/login";
+    }, AUTO_LOGOUT_TIME);
+}
+
+// Listen for any user activity
+document.addEventListener("mousemove", resetInactivityTimer);
+document.addEventListener("keydown", resetInactivityTimer);
+document.addEventListener("click", resetInactivityTimer);
+document.addEventListener("scroll", resetInactivityTimer);
+
+// Start timer on page load
+resetInactivityTimer();
+
+window.addEventListener("beforeunload", () => {
+    document.cookie = "logged_in=false; path=/";
+});
 
 </script>
 </body>

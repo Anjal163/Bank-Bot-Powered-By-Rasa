@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SmartBank Login</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #0E4C68, #041C32);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .login-box {
+        width: 360px;
+        padding: 30px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        text-align: center;
+    }
+
+    .login-box h2 {
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    input {
+        width: 90%;
+        padding: 12px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+    }
+
+    button {
+        width: 95%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #1E3A8A;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    button:hover {
+        background: #2563EB;
+    }
+
+    a {
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>SmartBank Login</h2>
+
+    <form action="/login" method="post">
+        <input type="text" name="username" placeholder="Enter Username" required><br>
+        <input type="password" name="password" placeholder="Enter Password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p style="margin-top:15px;">Don't have an account?  
+        <a href="/signup">Create one</a>
+    </p>
+    <a href="/admin/login" style="color:yellow;">Admin Login</a>
+
+</div>
+
+</body>
+</html>
