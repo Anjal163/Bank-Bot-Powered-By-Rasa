@@ -11,13 +11,48 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
+        .background-text {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.login-box {
+    position: relative;
+    z-index: 1;
+}
         .login-box {
-            background: rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 15px;
-            width: 350px;
+            background: rgba(255,255,255,0.12);
+            padding: 35px;
+            border-radius: 18px;
+            width: 380px;
             text-align: center;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+        }
+        .logo {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            margin: 5px 0 15px 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
         }
         input {
             width: 100%;
@@ -25,9 +60,11 @@
             margin-top: 12px;
             border-radius: 8px;
             border: none;
+            outline: none;
+            font-size: 15px;
         }
         button {
-            margin-top: 15px;
+            margin-top: 20px;
             padding: 12px;
             width: 100%;
             background: #1E90FF;
@@ -36,15 +73,33 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
+            font-weight: 600;
         }
         button:hover {
             background: #1C6ED5;
         }
+
+        /* Back button */
+        .back-btn {
+            margin-top: 15px;
+            background: #6c757d;
+        }
+        .back-btn:hover {
+            background: #5a6268;
+        }
     </style>
 </head>
 <body>
-
+ <div class="background-text">
+    Bank Bot – AI Chatbot for Banking FAQs
+</div>
 <div class="login-box">
+
+    <!-- Logo -->
+    <img src="/static/Bankbot_logo.png" alt="Bank Logo" class="logo">
+
+    <!-- Bank name -->
+    <h1>SmartBank</h1>
     <h2>Admin Login</h2>
 
     <form action="/admin/login" method="POST">
@@ -52,7 +107,14 @@
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Login</button>
     </form>
+
+    <!-- Back to user login -->
+    <form action="/login">
+        <button type="submit" class="back-btn">Back to User Login</button>
+    </form>
+
 </div>
 
 </body>
 </html>
+

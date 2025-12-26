@@ -209,9 +209,32 @@
     20% { opacity: 1; }
     100% { opacity: 0.2; }
   }
+  .background-text {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 45px;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.login-box {
+    position: relative;
+    z-index: 1;
+}
 </style>
 </head>
 <body>
+  <div class="background-text">
+    Bank Bot – AI Chatbot for Banking FAQs
+</div>
+
   <div class="bg-circles">
     <span style="left:10%; width:35px; height:35px;"></span>
     <span style="left:50%; width:22px; height:22px;"></span>
@@ -441,7 +464,7 @@ function speakText(text) {
 // AUTO LOGOUT AFTER INACTIVITY
 // ------------------------------
 let inactivityTimer;
-const AUTO_LOGOUT_TIME = 3 * 60 * 1000; // 3 minutes
+const AUTO_LOGOUT_TIME = 2 * 60 * 1000; // 2 minutes
 
 function resetInactivityTimer() {
     clearTimeout(inactivityTimer);

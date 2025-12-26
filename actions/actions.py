@@ -92,8 +92,8 @@ class ActionSendOtpEmail(Action):
             upsert=True
         )
 
-        subject = "Your OTP for Phone Update"
-        body = f"Your OTP is: {otp_code}\nIt expires in 5 minutes."
+        subject = "Your OTP for balance enquiry "
+        body = f"Your OTP is: {otp_code}\nIt expires in 5 minutes.If not you contact immediately to the nearest bank or on online portal"
 
         try:
             send_email(email, subject, body)
@@ -107,6 +107,7 @@ class ActionSendOtpEmail(Action):
 
 
 # =============== VALIDATE OTP ============================
+
 class ActionValidateOtp(Action):
     def name(self):
         return "action_validate_otp"
@@ -133,6 +134,7 @@ class ActionValidateOtp(Action):
         return []
 
 class ActionVerifyBalance(Action):
+    
     def name(self) -> str:
         return "action_verify_balance"
 

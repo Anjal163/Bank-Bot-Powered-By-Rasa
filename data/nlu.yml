@@ -1254,6 +1254,7 @@ nlu:
 - intent: out_of_scope
   examples: |
     - tell me a joke
+    - book a flight ticket
     - what's the weather?
     - order pizza
     - something unrelated
